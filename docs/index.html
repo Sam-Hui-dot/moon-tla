@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>moon-tla Studio — Zero-Upload TLA+ Model Checker &amp; Counterexample Visualizer</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --panel: #111827;
+      --panel-2: #1e293b;
+      --border: #263248;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --ok: #10b981;
+      --err: #f43f5e;
+      --warn: #f59e0b;
+      --live: #a855f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--accent);
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    select, input[type="number"], button {
+      font-family: inherit;
+      font-size: 13px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      padding: 7px 11px;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: 1px solid var(--accent);
+      border-color: var(--accent);
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    button:hover {
+      background: #27354d;
+      border-color: #475569;
+    }
+    button.primary {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    button.primary:hover {
+      background: #0369a1;
+    }
+    button.toggle-bug {
+      background: #3f1323;
+      border-color: #f43f5e;
+      color: #fda4af;
+    }
+    button.toggle-bug:hover {
+      background: #5b1830;
+    }
+    button.toggle-safe {
+      background: #064e3b;
+      border-color: #10b981;
+      color: #6ee7b7;
+    }
+    button.toggle-safe:hover {
+      background: #065f46;
+    }
+    label.chk {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(380px, 44%) minmax(460px, 56%);
+      gap: 14px;
+      padding: 14px 18px 18px;
+    }
+    @media (max-width: 1024px) {
+      main { grid-template-columns: 1fr; }
+    }
+    .pane {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 620px;
+    }
+    .pane-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      background: #0f172a;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .desc-banner {
+      padding: 10px 14px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: #cbd5e1;
+    }
+    .editors {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .editor-label {
+      padding: 6px 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      background: #0d1526;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    textarea {
+      width: 100%;
+      border: 0;
+      resize: none;
+      background: #0b1220;
+      color: #e2e8f0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.5;
+      padding: 12px 14px;
+    }
+    #tla-editor { flex: 1; min-height: 360px; }
+    #cfg-editor { height: 135px; border-top: 1px solid var(--border); }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: #0f172a;
+    }
+    @media (max-width: 720px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .kpi {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 11px;
+    }
+    .kpi .k-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .kpi .k-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 15px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .k-ok { color: var(--ok); }
+    .k-err { color: var(--err); }
+    .k-warn { color: var(--warn); }
+    .k-live { color: var(--live); }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 8px 12px;
+      background: #0d1526;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .tab-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tab-btn {
+      font-size: 12px;
+      padding: 5px 11px;
+      background: transparent;
+      border-color: transparent;
+      color: var(--muted);
+    }
+    .tab-btn.active {
+      background: var(--panel-2);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .tab-actions { display: flex; gap: 6px; }
+    .tab-actions button { font-size: 11.5px; padding: 4px 9px; }
+
+    .output-body {
+      flex: 1;
+      overflow: auto;
+      padding: 14px;
+      background: #090f1d;
+    }
+    .svg-wrap {
+      overflow: auto;
+      text-align: center;
+    }
+    .svg-wrap svg {
+      max-width: 100%;
+      height: auto;
+    }
+    .err-box {
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--err);
+      background: #2c0b16;
+      color: #fecdd3;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+    table.diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    table.diff-table th, table.diff-table td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    table.diff-table th {
+      background: var(--panel-2);
+      color: var(--muted);
+      position: sticky;
+      top: 0;
+    }
+    .diff-chip {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #3b0d1b;
+      border: 1px solid #9f1239;
+      color: #fda4af;
+    }
+    .state-kv {
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    pre.report-pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    footer {
+      padding: 10px 20px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: var(--panel);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>moon-tla Studio</h1>
+      <span class="pill">Zero-Upload &middot; Pure MoonBit &middot; TLC-Compatible</span>
+    </div>
+    <div class="toolbar">
+      <select id="spec-select" aria-label="Protocol preset"></select>
+      <button id="pair-toggle-btn" style="display:none;"></button>
+      <label class="chk">Max states
+        <input id="max-states" type="number" min="100" max="500000" step="1000" value="50000" style="width:92px;" />
+      </label>
+      <label class="chk">
+        <input id="chk-deadlock" type="checkbox" checked />
+        Deadlock
+      </label>
+      <button id="run-btn" class="primary">Run Checker (Ctrl+Enter)</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="pane">
+      <div class="pane-head">
+        <span>TLA+ Specification &amp; TLC Config</span>
+        <span id="spec-badge" class="pill"></span>
+      </div>
+      <div id="spec-desc" class="desc-banner"></div>
+      <div class="editors">
+        <div class="editor-label">
+          <span id="tla-filename">Spec.tla</span>
+          <span>Indentation-sensitive TLA+</span>
+        </div>
+        <textarea id="tla-editor" spellcheck="false"></textarea>
+        <div class="editor-label">
+          <span id="cfg-filename">Spec.cfg</span>
+          <span>Standard TLC .cfg</span>
+        </div>
+        <textarea id="cfg-editor" spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <section class="pane">
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="k-label">Verdict</div>
+          <div id="kpi-verdict" class="k-val">—</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Distinct States</div>
+          <div id="kpi-states" class="k-val">—</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Graph Diameter</div>
+          <div id="kpi-diameter" class="k-val">—</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">Browser Runtime</div>
+          <div id="kpi-time" class="k-val">—</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab-btns">
+          <button class="tab-btn active" data-tab="trace">Counterexample Timeline (SVG)</button>
+          <button class="tab-btn" data-tab="graph">State-Space Graph (SVG)</button>
+          <button class="tab-btn" data-tab="diff">Step Diff Table</button>
+          <button class="tab-btn" data-tab="report">Report (Text / MD / JSON)</button>
+        </div>
+        <div class="tab-actions">
+          <button id="dl-svg-btn">Download SVG</button>
+          <button id="copy-md-btn">Copy Markdown</button>
+        </div>
+      </div>
+
+      <div id="output-body" class="output-body"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Executed 100% locally in your browser from compiled MoonBit (no JVM, no server upload).</span>
+    <span>
+      <a href="https://github.com/Sam-Hui-dot/moon-tla" target="_blank" rel="noreferrer">GitHub Repository</a>
+      &middot;
+      Verified against official Java TLC v1.7.4
+    </span>
+  </footer>
+
+  <script src="./moon-tla.js"></script>
+  <script src="./samples.js"></script>
+  <script>
+    (function () {
+      const SAMPLES = globalThis.MOON_TLA_SAMPLES || [];
+      const byId = new Map(SAMPLES.map((s) => [s.id, s]));
+
+      const specSelect = document.getElementById("spec-select");
+      const pairBtn = document.getElementById("pair-toggle-btn");
+      const specBadge = document.getElementById("spec-badge");
+      const specDesc = document.getElementById("spec-desc");
+      const tlaFilename = document.getElementById("tla-filename");
+      const cfgFilename = document.getElementById("cfg-filename");
+      const tlaEditor = document.getElementById("tla-editor");
+      const cfgEditor = document.getElementById("cfg-editor");
+      const maxStatesInput = document.getElementById("max-states");
+      const chkDeadlock = document.getElementById("chk-deadlock");
+      const runBtn = document.getElementById("run-btn");
+      const outputBody = document.getElementById("output-body");
+      const dlSvgBtn = document.getElementById("dl-svg-btn");
+      const copyMdBtn = document.getElementById("copy-md-btn");
+
+      const kpiVerdict = document.getElementById("kpi-verdict");
+      const kpiStates = document.getElementById("kpi-states");
+      const kpiDiameter = document.getElementById("kpi-diameter");
+      const kpiTime = document.getElementById("kpi-time");
+
+      let activeTab = "trace";
+      let reportFmt = "text";
+      let lastResponse = null;
+      let currentSpecId = null;
+
+      for (const s of SAMPLES) {
+        const opt = document.createElement("option");
+        opt.value = s.id;
+        opt.textContent = `[${s.tag}] ${s.title}`;
+        specSelect.appendChild(opt);
+      }
+
+      function escHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function loadPreset(id) {
+        const spec = byId.get(id) || SAMPLES[0];
+        if (!spec) return;
+        currentSpecId = spec.id;
+        specSelect.value = spec.id;
+        specBadge.textContent = spec.tag;
+        specDesc.textContent = spec.description;
+        tlaFilename.textContent = spec.id + ".tla";
+        cfgFilename.textContent = spec.id + ".cfg";
+        tlaEditor.value = spec.tla;
+        cfgEditor.value = spec.cfg;
+        chkDeadlock.checked = spec.check_deadlock !== false;
+
+        if (spec.pair && byId.has(spec.pair)) {
+          const target = byId.get(spec.pair);
+          pairBtn.style.display = "inline-block";
+          if (spec.tag === "Safe") {
+            pairBtn.className = "toggle-bug";
+            pairBtn.textContent = "Inject Bug (" + target.id + ")";
+          } else {
+            pairBtn.className = "toggle-safe";
+            pairBtn.textContent = "Switch to Safe (" + target.id + ")";
+          }
+          pairBtn.onclick = () => {
+            loadPreset(target.id);
+            runCheck();
+          };
+        } else {
+          pairBtn.style.display = "none";
+        }
+      }
+
+      function classifyStatus(res) {
+        const t = res.status_text || "";
+        if (t.startsWith("No errors")) return ["PASS", "k-ok"];
+        if (t.startsWith("Deadlock")) return ["DEADLOCK", "k-warn"];
+        if (t.startsWith("Temporal")) return ["LIVENESS", "k-live"];
+        if (t.startsWith("State limit")) return ["LIMIT", "k-warn"];
+        return ["VIOLATION", "k-err"];
+      }
+
+      function renderActiveTab() {
+        if (!lastResponse) return;
+        if (!lastResponse.ok) {
+          outputBody.innerHTML = `<div class="err-box">${escHtml(lastResponse.error)}</div>`;
+          return;
+        }
+        const res = lastResponse.result;
+        if (activeTab === "trace") {
+          outputBody.innerHTML = `<div class="svg-wrap">${lastResponse.trace_svg}</div>`;
+        } else if (activeTab === "graph") {
+          outputBody.innerHTML = `<div class="svg-wrap">${lastResponse.graph_svg}</div>`;
+        } else if (activeTab === "diff") {
+          if (!res.trace || res.trace.length === 0) {
+            outputBody.innerHTML = `<p style="color:#94a3b8;">No counterexample trace — all ${res.distinct_states} distinct states passed verification.</p>`;
+            return;
+          }
+          let html = `<table class="diff-table"><thead><tr><th>Step</th><th>Action</th><th>Changed Variables</th><th>Full State Snapshot</th></tr></thead><tbody>`;
+          for (const st of res.trace) {
+            const diffs = st.step === 1
+              ? `<span style="color:#38bdf8;">(initial state)</span>`
+              : (st.diffs.length === 0
+                ? `<span style="color:#94a3b8;">(stutter)</span>`
+                : st.diffs.map((d) => `<span class="diff-chip">${escHtml(d.name)}: ${escHtml(d.before)} &rarr; ${escHtml(d.after)}</span>`).join(""));
+            const bindings = st.bindings.map((b) => `<div><strong>${escHtml(b.name)}</strong> = ${escHtml(b.value)}</div>`).join("");
+            html += `<tr><td>${st.step}</td><td>${escHtml(st.action)}</td><td>${diffs}</td><td class="state-kv">${bindings}</td></tr>`;
+          }
+          html += `</tbody></table>`;
+          outputBody.innerHTML = html;
+        } else {
+          const content = reportFmt === "markdown"
+            ? lastResponse.markdown
+            : reportFmt === "json"
+              ? JSON.stringify(res, null, 2)
+              : lastResponse.text;
+          outputBody.innerHTML = `
+            <div style="margin-bottom:10px;display:flex;gap:6px;">
+              <button data-rfmt="text" class="${reportFmt === "text" ? "primary" : ""}">TLC Text</button>
+              <button data-rfmt="markdown" class="${reportFmt === "markdown" ? "primary" : ""}">Markdown</button>
+              <button data-rfmt="json" class="${reportFmt === "json" ? "primary" : ""}">JSON</button>
+            </div>
+            <pre class="report-pre">${escHtml(content)}</pre>
+          `;
+          outputBody.querySelectorAll("[data-rfmt]").forEach((b) => {
+            b.addEventListener("click", () => {
+              reportFmt = b.getAttribute("data-rfmt");
+              renderActiveTab();
+            });
+          });
+        }
+      }
+
+      function runCheck() {
+        const maxStates = Math.max(100, parseInt(maxStatesInput.value || "50000", 10));
+        const t0 = performance.now();
+        lastResponse = globalThis.MoonTla.checkSpec(tlaEditor.value, cfgEditor.value, {
+          maxStates,
+          maxGraphNodes: 80,
+          checkDeadlock: chkDeadlock.checked,
+        });
+        const elapsed = performance.now() - t0;
+        kpiTime.textContent = `${elapsed.toFixed(1)} ms`;
+
+        if (!lastResponse.ok) {
+          kpiVerdict.textContent = "ERROR";
+          kpiVerdict.className = "k-val k-err";
+          kpiStates.textContent = "—";
+          kpiDiameter.textContent = "—";
+        } else {
+          const r = lastResponse.result;
+          const [label, cls] = classifyStatus(r);
+          kpiVerdict.textContent = label;
+          kpiVerdict.className = "k-val " + cls;
+          kpiStates.textContent = `${r.distinct_states} (${r.transitions} edges)`;
+          kpiDiameter.textContent = `${r.diameter}`;
+        }
+        renderActiveTab();
+      }
+
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeTab = btn.getAttribute("data-tab");
+          renderActiveTab();
+        });
+      });
+
+      specSelect.addEventListener("change", () => {
+        loadPreset(specSelect.value);
+        runCheck();
+      });
+
+      runBtn.addEventListener("click", runCheck);
+      document.addEventListener("keydown", (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+          e.preventDefault();
+          runCheck();
+        }
+      });
+
+      dlSvgBtn.addEventListener("click", () => {
+        if (!lastResponse || !lastResponse.ok) return;
+        const svg = activeTab === "graph" ? lastResponse.graph_svg : lastResponse.trace_svg;
+        const suffix = activeTab === "graph" ? "graph" : "trace";
+        const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${currentSpecId || "moon-tla"}-${suffix}.svg`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      copyMdBtn.addEventListener("click", async () => {
+        if (!lastResponse || !lastResponse.ok) return;
+        try {
+          await navigator.clipboard.writeText(lastResponse.markdown);
+          copyMdBtn.textContent = "Copied";
+          setTimeout(() => (copyMdBtn.textContent = "Copy Markdown"), 1200);
+        } catch {
+          activeTab = "report";
+          reportFmt = "markdown";
+          renderActiveTab();
+        }
+      });
+
+      const defaultPreset = byId.has("RaftSplitBrainBuggy") ? "RaftSplitBrainBuggy" : (SAMPLES[0] && SAMPLES[0].id);
+      if (defaultPreset) {
+        loadPreset(defaultPreset);
+        runCheck();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/core/json",
+  "Sam-Hui-dot/moon-tla",
+}
+
+supported_targets = "js"
+
+pkgtype(kind: "executable")

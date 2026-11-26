@@ -139,4 +139,16 @@ test "deadlock detection and liveness tarjan scc lasso trace" {
     live_ok_tla, "SPECIFICATION Spec\nPROPERTY ZeroLeadsToOne",
   )
   assert_eq(res_lo.status, Ok)
+
+  let trace_svg = @moon-tla.render_trace_svg(res_lf)
+  assert_true(trace_svg.contains("moon-tla-trace"))
+  assert_true(trace_svg.contains("CYCLE"))
+  let graph_svg = @moon-tla.render_state_graph_svg(res_lf)
+  assert_true(graph_svg.contains("moon-tla-graph"))
+  let ok_svg = @moon-tla.render_trace_svg(res_lo)
+  assert_true(ok_svg.contains("Verified Safe"))
+  let md = @moon-tla.render_result_markdown(res_dl)
+  assert_true(md.contains("## Counterexample Trace"))
+  let txt = @moon-tla.render_result_text(res_dl)
+  assert_true(txt.contains("Deadlock reached"))
 }
