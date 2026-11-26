@@ -1,0 +1,1045 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="moon-tla-graph" width="1178" height="3254" viewBox="0 0 1178 3254">
+<defs>
+  <marker id="g-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/></marker>
+  <marker id="g-arrow-trace" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e"/></marker>
+</defs>
+<rect width="1178" height="3254" rx="12" fill="#0f172a"/>
+<text x="24" y="30" font-family="ui-sans-serif,system-ui,sans-serif" font-size="15" font-weight="700" fill="#f8fafc">RaftSplitBrainBuggy State-Space Graph (BFS Layers 0..6)</text>
+<text x="24" y="50" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" fill="#94a3b8">showing 80 / 597 states (full trace preserved)   diameter=7   hover nodes for full state snapshot</text>
+<path d="M 139 1636 Q 214 1636 269 1636" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 139 1636 Q 214 2027 269 2404" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 151 1620 C 175 1592, 103 1592, 127 1620" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 289 854 Q 364 583 419 326" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 289 854 Q 364 823 419 807" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 289 854 Q 364 944 419 1020" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 289 854 Q 364 1064 419 1261" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 301 838 C 325 810, 253 810, 277 838" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 289 1636 Q 364 1094 419 567" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 289 1636 Q 364 1575 419 1529" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 289 1636 Q 364 1696 419 1742" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 289 1636 Q 364 1816 419 1982" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 289 1636 Q 364 1936 419 2223" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 301 1620 C 325 1592, 253 1592, 277 1620" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 289 2418 Q 364 1605 419 807" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 289 2418 Q 364 2087 419 1770" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 289 2418 Q 364 2448 419 2464" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 289 2418 Q 364 2568 419 2704" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 289 2418 Q 364 2688 419 2945" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 301 2402 C 325 2374, 253 2374, 277 2402" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 312 Q 514 225 569 152" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 312 Q 514 258 569 219" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 312 Q 514 291 569 285" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 439 312 Q 514 325 569 324" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 451 296 C 475 268, 403 268, 427 296" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 553 Q 514 345 569 152" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 553 Q 514 478 569 418" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 553 Q 514 512 569 485" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 553 Q 514 578 569 590" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 439 553 Q 514 611 569 656" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 439 553 Q 514 645 569 723" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 451 537 C 475 509, 403 509, 427 537" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 793 Q 514 499 569 219" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 793 Q 514 632 569 485" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 793 Q 514 798 569 804" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 793 Q 514 831 569 856" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 439 793 Q 514 865 569 923" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 439 793 Q 514 898 569 989" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 439 793 Q 514 931 569 1056" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 451 777 C 475 749, 403 749, 427 777" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 1034 Q 514 1085 569 1122" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 1034 Q 514 1118 569 1189" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 1034 Q 514 985 569 951" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 1034 Q 514 1151 569 1255" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 439 1034 Q 514 1185 569 1322" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n1)</title></path>
+<path d="M 451 1018 C 475 990, 403 990, 427 1018" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 1275 Q 514 1339 569 1389" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 1275 Q 514 972 569 684" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 1275 Q 514 1372 569 1455" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 1275 Q 514 1272 569 1269" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 439 1275 Q 514 1405 569 1522" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n1)</title></path>
+<path d="M 451 1259 C 475 1231, 403 1231, 427 1259" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 1515 Q 514 959 569 418" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 1515 Q 514 1558 569 1588" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 1515 Q 514 1592 569 1655" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 439 1515 Q 514 1625 569 1721" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 451 1499 C 475 1471, 403 1471, 427 1499" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 1756 Q 514 1113 569 485" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 1756 Q 514 1679 569 1616" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 1756 Q 514 1779 569 1788" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 1756 Q 514 1812 569 1854" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 439 1756 Q 514 1845 569 1921" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 439 1756 Q 514 1879 569 1988" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 439 1756 Q 514 1912 569 2054" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 451 1740 C 475 1712, 403 1712, 427 1740" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 1996 Q 514 2065 569 2121" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 1996 Q 514 2098 569 2187" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 1996 Q 514 1932 569 1882" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 1996 Q 514 2132 569 2254" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 439 1996 Q 514 2165 569 2320" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n2)</title></path>
+<path d="M 451 1980 C 475 1952, 403 1952, 427 1980" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 2237 Q 514 1487 569 751" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 2237 Q 514 2319 569 2387" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 2237 Q 514 2352 569 2453" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 2237 Q 514 2252 569 2254" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 439 2237 Q 514 2385 569 2520" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n2)</title></path>
+<path d="M 451 2221 C 475 2193, 403 2193, 427 2221" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 2478 Q 514 1641 569 818" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 2478 Q 514 2140 569 1816" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 2478 Q 514 2539 569 2587" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 439 2478 Q 514 2572 569 2653" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 451 2462 C 475 2434, 403 2434, 427 2462" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 2718 Q 514 2726 569 2734" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 2718 Q 514 2326 569 1949" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 2718 Q 514 2759 569 2786" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 2718 Q 514 2792 569 2853" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 439 2718 Q 514 2825 569 2919" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n3)</title></path>
+<path d="M 451 2702 C 475 2674, 403 2674, 427 2702" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 439 2959 Q 514 1981 569 1017" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 439 2959 Q 514 2979 569 2986" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 439 2959 Q 514 3012 569 3052" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 439 2959 Q 514 2913 569 2881" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 439 2959 Q 514 3046 569 3119" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n3)</title></path>
+<path d="M 451 2943 C 475 2915, 403 2915, 427 2943" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 138 Q 664 197 719 242" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 138 Q 664 289 719 426" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 138 Q 589 176 589 257" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 589 138 Q 664 381 719 610" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 589 138 Q 664 473 719 794" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 601 122 C 625 94, 553 94, 577 122" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 205 Q 664 322 719 426" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 205 Q 664 598 719 978" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 205 Q 664 690 719 1162" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 589 205 Q 664 782 719 1346" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 589 205 Q 589 243 589 324" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 601 189 C 625 161, 553 161, 577 189" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 271 Q 664 723 719 1162" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 271 Q 664 907 719 1530" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 589 271 Q 664 999 719 1714" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n1)</title></path>
+<path d="M 601 255 C 625 227, 553 227, 577 255" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 338 Q 664 481 719 610" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 338 Q 664 941 719 1530" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 589 338 Q 664 1125 719 1898" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>BecomeLeader(n1)</title></path>
+<path d="M 601 322 C 625 294, 553 294, 577 322" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 404 Q 664 330 719 270" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 404 Q 664 1250 719 2082" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 404 Q 589 1008 589 1655" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 589 404 Q 664 1342 719 2266" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 589 404 Q 664 1434 719 2450" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 601 388 C 625 360, 553 360, 577 388" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 471 Q 664 455 719 454" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 471 Q 664 1283 719 2082" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 471 Q 664 1559 719 2634" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 471 Q 664 1651 719 2818" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 601 455 C 625 427, 553 427, 577 455" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 537 Q 589 1308 589 2121" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 537 Q 664 1684 719 2818" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 601 521 C 625 493, 553 493, 577 521" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 604 Q 589 875 589 1189" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 604 Q 664 1810 719 3002" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 601 588 C 625 560, 553 560, 577 588" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 670 Q 664 1475 719 2266" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 601 654 C 625 626, 553 626, 577 654" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 737 Q 664 772 719 794" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 601 721 C 625 693, 553 693, 577 721" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 804 Q 664 898 719 978" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 804 Q 664 1726 719 2634" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 804 Q 589 1674 589 2587" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 601 788 C 625 760, 553 760, 577 788" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 870 Q 589 1774 589 2720" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 601 854 C 625 826, 553 826, 577 854" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 921 C 625 893, 553 893, 577 921" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1003 Q 664 1181 719 1346" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 601 987 C 625 959, 553 959, 577 987" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1070 Q 589 1241 589 1455" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 601 1054 C 625 1026, 553 1026, 577 1054" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1136 Q 664 696 719 270" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 1136 Q 589 675 589 285" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 601 1120 C 625 1092, 553 1092, 577 1120" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1203 Q 664 729 719 270" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 1203 Q 589 1408 589 1655" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 601 1187 C 625 1159, 553 1159, 577 1187" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 1253 C 625 1225, 553 1225, 577 1253" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 1320 C 625 1292, 553 1292, 577 1320" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1403 Q 664 1197 719 1006" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 1403 Q 589 842 589 352" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 601 1387 C 625 1359, 553 1359, 577 1387" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1469 Q 664 1230 719 1006" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 1469 Q 589 2007 589 2587" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 601 1453 C 625 1425, 553 1425, 577 1453" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 1520 C 625 1492, 553 1492, 577 1520" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1602 Q 664 1849 719 2082" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 1602 Q 589 1640 589 1721" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 601 1586 C 625 1558, 553 1558, 577 1586" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 1653 C 625 1625, 553 1625, 577 1653" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1735 Q 664 2099 719 2450" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 601 1719 C 625 1691, 553 1691, 577 1719" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 1802 Q 664 2225 719 2634" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 1802 Q 589 2206 589 2653" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 601 1786 C 625 1758, 553 1758, 577 1786" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 1852 C 625 1824, 553 1824, 577 1852" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 1919 C 625 1891, 553 1891, 577 1919" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2002 Q 589 2473 589 2986" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 601 1986 C 625 1958, 553 1958, 577 1986" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2068 Q 589 2239 589 2453" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 601 2052 C 625 2024, 553 2024, 577 2052" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2135 Q 664 1195 719 270" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n2)</title></path>
+<path d="M 589 2135 Q 589 1175 589 285" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 601 2119 C 625 2091, 553 2091, 577 2119" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2201 Q 664 1228 719 270" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 2201 Q 589 1907 589 1683" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 601 2185 C 625 2157, 553 2157, 577 2185" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2252 C 625 2224, 553 2224, 577 2252" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2318 C 625 2290, 553 2290, 577 2318" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2401 Q 589 2040 589 1749" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 601 2385 C 625 2357, 553 2357, 577 2385" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2467 Q 589 2539 589 2653" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 601 2451 C 625 2423, 553 2423, 577 2451" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2518 C 625 2490, 553 2490, 577 2518" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2585 C 625 2557, 553 2557, 577 2585" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2651 C 625 2623, 553 2623, 577 2651" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2734 Q 664 1863 719 1006" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n3)</title></path>
+<path d="M 589 2734 Q 589 1508 589 352" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 601 2718 C 625 2690, 553 2690, 577 2718" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 2800 Q 664 1896 719 1006" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Timeout(n1)</title></path>
+<path d="M 589 2800 Q 589 2672 589 2615" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n1, n3)</title></path>
+<path d="M 601 2784 C 625 2756, 553 2756, 577 2784" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2851 C 625 2823, 553 2823, 577 2851" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 2917 C 625 2889, 553 2889, 577 2917" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 3000 Q 589 2339 589 1749" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 601 2984 C 625 2956, 553 2956, 577 2984" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 589 3066 Q 589 2838 589 2681" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n3)</title></path>
+<path d="M 601 3050 C 625 3022, 553 3022, 577 3050" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 601 3117 C 625 3089, 553 3089, 577 3117" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 240 C 775 212, 703 212, 727 240" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 739 440 Q 739 780 739 1162" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 739 440 Q 739 504 739 610" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 751 424 C 775 396, 703 396, 727 424" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 739 624 Q 739 1056 739 1530" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 751 608 C 775 580, 703 580, 727 608" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 792 C 775 764, 703 764, 727 792" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 976 C 775 948, 703 948, 727 976" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 739 1176 Q 739 1332 739 1530" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n1)</title></path>
+<path d="M 751 1160 C 775 1132, 703 1132, 727 1160" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 1344 C 775 1316, 703 1316, 727 1344" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 1528 C 775 1500, 703 1500, 727 1528" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 1712 C 775 1684, 703 1684, 727 1712" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 1896 C 775 1868, 703 1868, 727 1896" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 739 2096 Q 739 2252 739 2450" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>GrantVote(n3, n2)</title></path>
+<path d="M 751 2080 C 775 2052, 703 2052, 727 2080" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 2264 C 775 2236, 703 2236, 727 2264" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 2448 C 775 2420, 703 2420, 727 2448" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 2632 C 775 2604, 703 2604, 727 2632" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 2816 C 775 2788, 703 2788, 727 2816" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 751 3000 C 775 2972, 703 2972, 727 3000" fill="none" stroke="#334155" stroke-width="1.1" marker-end="url(#g-arrow)"><title>Idle</title></path>
+<path d="M 139 1636 Q 214 1245 269 868" fill="none" stroke="#f43f5e" stroke-width="2.4" marker-end="url(#g-arrow-trace)"><title>Timeout(n1)</title></path>
+<path d="M 289 854 Q 364 703 419 567" fill="none" stroke="#f43f5e" stroke-width="2.4" marker-end="url(#g-arrow-trace)"><title>Timeout(n2)</title></path>
+<path d="M 439 553 Q 514 545 569 537" fill="none" stroke="#f43f5e" stroke-width="2.4" marker-end="url(#g-arrow-trace)"><title>GrantVote(n1, n2)</title></path>
+<path d="M 589 537 Q 664 1776 719 3002" fill="none" stroke="#f43f5e" stroke-width="2.4" marker-end="url(#g-arrow-trace)"><title>GrantVote(n2, n1)</title></path>
+<path d="M 739 3016 Q 814 2326 869 1650" fill="none" stroke="#f43f5e" stroke-width="2.4" marker-end="url(#g-arrow-trace)"><title>BecomeLeader(n1)</title></path>
+<path d="M 889 1636 Q 964 1636 1019 1636" fill="none" stroke="#f43f5e" stroke-width="2.4" marker-end="url(#g-arrow-trace)"><title>BecomeLeader(n2)</title></path>
+<g>
+  <title>State #0 (depth 0)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 0 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; Nil @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="139" cy="1636" r="18" fill="#0369a1" stroke="#7dd3fc" stroke-width="2"/>
+  <text x="139" y="1640" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s0</text>
+  <text x="139" y="1667" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #1 (depth 1)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="289" cy="854" r="18" fill="#881337" stroke="#fb7185" stroke-width="2"/>
+  <text x="289" y="858" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s1</text>
+  <text x="289" y="885" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #2 (depth 1)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="289" cy="1636" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="289" y="1640" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s2</text>
+  <text x="289" y="1667" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #3 (depth 1)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="289" cy="2418" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="289" y="2422" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s3</text>
+  <text x="289" y="2449" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #4 (depth 2)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="312" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="316" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s4</text>
+  <text x="439" y="343" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #5 (depth 2)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="553" r="18" fill="#881337" stroke="#fb7185" stroke-width="2"/>
+  <text x="439" y="557" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s5</text>
+  <text x="439" y="584" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #6 (depth 2)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="439" cy="793" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="797" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s6</text>
+  <text x="439" y="824" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #7 (depth 2)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="1034" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="1038" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s7</text>
+  <text x="439" y="1065" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #8 (depth 2)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="1275" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="1279" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s8</text>
+  <text x="439" y="1306" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #9 (depth 2)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="1515" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="1519" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s9</text>
+  <text x="439" y="1546" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #10 (depth 2)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="439" cy="1756" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="1760" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s10</text>
+  <text x="439" y="1787" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #11 (depth 2)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="1996" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="2000" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s11</text>
+  <text x="439" y="2027" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #12 (depth 2)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="439" cy="2237" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="2241" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s12</text>
+  <text x="439" y="2268" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #13 (depth 2)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="439" cy="2478" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="2482" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s13</text>
+  <text x="439" y="2509" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #14 (depth 2)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n1, n3})</title>
+  <circle cx="439" cy="2718" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="2722" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s14</text>
+  <text x="439" y="2749" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #15 (depth 2)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="439" cy="2959" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="439" y="2963" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s15</text>
+  <text x="439" y="2990" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #16 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="138" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="142" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s16</text>
+  <text x="589" y="169" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #17 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="205" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="209" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s17</text>
+  <text x="589" y="236" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #18 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="271" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="275" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s18</text>
+  <text x="589" y="302" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #19 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="338" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="342" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s19</text>
+  <text x="589" y="369" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #20 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="404" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="408" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s20</text>
+  <text x="589" y="435" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #21 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="471" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="475" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s21</text>
+  <text x="589" y="502" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #22 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="537" r="18" fill="#881337" stroke="#fb7185" stroke-width="2"/>
+  <text x="589" y="541" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s22</text>
+  <text x="589" y="568" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #23 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="604" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="608" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s23</text>
+  <text x="589" y="635" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #24 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="670" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="674" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s24</text>
+  <text x="589" y="701" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #25 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="737" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="741" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s25</text>
+  <text x="589" y="768" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #26 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="804" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="808" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s26</text>
+  <text x="589" y="835" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #27 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n1, n3})</title>
+  <circle cx="589" cy="870" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="874" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s27</text>
+  <text x="589" y="901" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #28 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="937" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="941" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s28</text>
+  <text x="589" y="968" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #29 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="589" cy="1003" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1007" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s29</text>
+  <text x="589" y="1034" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #30 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="1070" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1074" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s30</text>
+  <text x="589" y="1101" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #31 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1136" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1140" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s31</text>
+  <text x="589" y="1167" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #32 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1203" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1207" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s32</text>
+  <text x="589" y="1234" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #33 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n2, n3} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1269" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1273" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s33</text>
+  <text x="589" y="1300" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #34 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;leader&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1336" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1340" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s34</text>
+  <text x="589" y="1367" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #35 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1403" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1407" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s35</text>
+  <text x="589" y="1434" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #36 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="1469" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1473" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s36</text>
+  <text x="589" y="1500" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #37 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;leader&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1536" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1540" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s37</text>
+  <text x="589" y="1567" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #38 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 2 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="1602" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1606" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s38</text>
+  <text x="589" y="1633" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #39 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1669" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1673" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s39</text>
+  <text x="589" y="1700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #40 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 2 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="1735" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1739" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s40</text>
+  <text x="589" y="1766" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #41 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="1802" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1806" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s41</text>
+  <text x="589" y="1833" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #42 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="1868" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1872" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s42</text>
+  <text x="589" y="1899" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #43 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {n1, n3})</title>
+  <circle cx="589" cy="1935" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="1939" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s43</text>
+  <text x="589" y="1966" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #44 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="589" cy="2002" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2006" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s44</text>
+  <text x="589" y="2033" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #45 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="2068" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2072" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s45</text>
+  <text x="589" y="2099" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #46 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="2135" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2139" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s46</text>
+  <text x="589" y="2166" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #47 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="2201" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2205" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s47</text>
+  <text x="589" y="2232" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #48 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n1, n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="2268" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2272" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s48</text>
+  <text x="589" y="2299" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #49 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;leader&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="2334" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2338" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s49</text>
+  <text x="589" y="2365" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #50 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 2 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="2401" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2405" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s50</text>
+  <text x="589" y="2432" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #51 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="2467" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2471" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s51</text>
+  <text x="589" y="2498" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #52 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;leader&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="589" cy="2534" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2538" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s52</text>
+  <text x="589" y="2565" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #53 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n1, n3})</title>
+  <circle cx="589" cy="2601" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2605" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s53</text>
+  <text x="589" y="2632" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #54 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 2 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="589" cy="2667" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2671" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s54</text>
+  <text x="589" y="2698" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #55 (depth 3)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n1, n3})</title>
+  <circle cx="589" cy="2734" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2738" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s55</text>
+  <text x="589" y="2765" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #56 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="2800" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2804" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s56</text>
+  <text x="589" y="2831" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #57 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n1, n2, n3})</title>
+  <circle cx="589" cy="2867" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2871" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s57</text>
+  <text x="589" y="2898" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #58 (depth 3)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 0 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;leader&quot;)
+votedFor = (n1 :&gt; n3 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n1, n3})</title>
+  <circle cx="589" cy="2933" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="2937" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s58</text>
+  <text x="589" y="2964" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #59 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 2 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {n2} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="589" cy="3000" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="3004" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s59</text>
+  <text x="589" y="3031" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #60 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="589" cy="3066" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="3070" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s60</text>
+  <text x="589" y="3097" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #61 (depth 3)
+currentTerm = (n1 :&gt; 0 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;follower&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;leader&quot;)
+votedFor = (n1 :&gt; Nil @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {} @@ n2 :&gt; {} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="589" cy="3133" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="589" y="3137" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s61</text>
+  <text x="589" y="3164" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #62 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="256" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="260" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s62</text>
+  <text x="739" y="287" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #63 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="739" cy="440" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="444" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s63</text>
+  <text x="739" y="471" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #64 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="624" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="628" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s64</text>
+  <text x="739" y="655" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #65 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="808" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="812" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s65</text>
+  <text x="739" y="839" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #66 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="739" cy="992" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="996" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s66</text>
+  <text x="739" y="1023" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #67 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 2 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {} @@ n3 :&gt; {n3})</title>
+  <circle cx="739" cy="1176" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="1180" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s67</text>
+  <text x="739" y="1207" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #68 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n3 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {} @@ n3 :&gt; {n2, n3})</title>
+  <circle cx="739" cy="1360" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="1364" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s68</text>
+  <text x="739" y="1391" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #69 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 2 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n2, n3} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="1544" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="1548" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s69</text>
+  <text x="739" y="1575" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #70 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 2 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;leader&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="1728" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="1732" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s70</text>
+  <text x="739" y="1759" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #71 (depth 4)
+currentTerm = (n1 :&gt; 2 @@ n2 :&gt; 0 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;leader&quot; @@ n2 :&gt; &quot;follower&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; Nil @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="1912" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="1916" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s71</text>
+  <text x="739" y="1943" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #72 (depth 4)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 2 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="739" cy="2096" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="2100" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s72</text>
+  <text x="739" y="2127" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #73 (depth 4)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 2 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n1)
+votesGranted = (n1 :&gt; {n1, n3} @@ n2 :&gt; {n2} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="2280" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="2284" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s73</text>
+  <text x="739" y="2311" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #74 (depth 4)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 2 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n2)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2, n3} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="2464" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="2468" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s74</text>
+  <text x="739" y="2495" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #75 (depth 4)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 2)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n1 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="739" cy="2648" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="2652" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s75</text>
+  <text x="739" y="2679" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #76 (depth 4)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 1)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;candidate&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n2 @@ n3 :&gt; n3)
+votesGranted = (n1 :&gt; {n1} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {n3})</title>
+  <circle cx="739" cy="2832" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <text x="739" y="2836" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s76</text>
+  <text x="739" y="2863" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #83 (depth 4)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;candidate&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="739" cy="3016" r="18" fill="#881337" stroke="#fb7185" stroke-width="2"/>
+  <text x="739" y="3020" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s83</text>
+  <text x="739" y="3047" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<g>
+  <title>State #248 (depth 5)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;leader&quot; @@ n2 :&gt; &quot;candidate&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="889" cy="1636" r="18" fill="#881337" stroke="#fb7185" stroke-width="2"/>
+  <text x="889" y="1640" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s248</text>
+  <text x="889" y="1667" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<circle cx="1039" cy="1636" r="24" fill="none" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4 3"/>
+<g>
+  <title>State #596 (depth 6)
+currentTerm = (n1 :&gt; 1 @@ n2 :&gt; 1 @@ n3 :&gt; 0)
+state = (n1 :&gt; &quot;leader&quot; @@ n2 :&gt; &quot;leader&quot; @@ n3 :&gt; &quot;follower&quot;)
+votedFor = (n1 :&gt; n2 @@ n2 :&gt; n1 @@ n3 :&gt; Nil)
+votesGranted = (n1 :&gt; {n1, n2} @@ n2 :&gt; {n1, n2} @@ n3 :&gt; {})</title>
+  <circle cx="1039" cy="1636" r="18" fill="#9f1239" stroke="#fda4af" stroke-width="2"/>
+  <text x="1039" y="1640" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" font-weight="700" fill="#f8fafc">s596</text>
+  <text x="1039" y="1667" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#94a3b8">currentTerm=(n1 :&gt; ...</text>
+</g>
+<circle cx="30" cy="3232" r="6" fill="#0369a1" stroke="#7dd3fc" stroke-width="1.5"/><text x="42" y="3236" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#cbd5e1">Init</text>
+<circle cx="92" cy="3232" r="6" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/><text x="104" y="3236" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#cbd5e1">Reachable</text>
+<circle cx="184" cy="3232" r="6" fill="#881337" stroke="#fb7185" stroke-width="1.5"/><text x="196" y="3236" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#cbd5e1">Counterexample Path</text>
+<circle cx="338" cy="3232" r="6" fill="#9f1239" stroke="#fda4af" stroke-width="1.5"/><text x="350" y="3236" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#cbd5e1">Violation / Deadlock</text>
+</svg>

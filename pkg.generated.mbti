@@ -1,0 +1,388 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Sam-Hui-dot/moon-tla"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+// Values
+pub fn cfg_value_to_val(CfgValue) -> TlaVal
+
+pub fn check_module(TlaModule, TlaConfig, options? : CheckOptions) -> CheckResult raise TlaError
+
+pub fn check_options(max_states? : Int32, max_graph_nodes? : Int32, check_deadlock? : Bool?) -> CheckOptions
+
+pub fn check_spec_sources(String, String, options? : CheckOptions) -> CheckResult raise TlaError
+
+pub fn compare_val(TlaVal, TlaVal) -> Int32
+
+pub fn default_config(init? : String, next? : String, invariants? : Array[String], properties? : Array[String], constants? : Array[(String, CfgValue)], check_deadlock? : Bool) -> TlaConfig
+
+pub fn error_message(Error) -> String
+
+pub fn eval_expr_standalone(Expr, constants? : Array[(String, TlaVal)]) -> TlaVal raise TlaError
+
+pub fn fingerprint_state(Array[String], Array[TlaVal]) -> (UInt64, UInt64)
+
+pub fn fingerprint_val(TlaVal) -> (UInt64, UInt64)
+
+pub fn format_val(TlaVal) -> String
+
+pub fn func_domain(TlaVal) -> TlaVal raise TlaError
+
+pub fn func_lookup(TlaVal, TlaVal) -> TlaVal?
+
+pub fn make_func(Array[(TlaVal, TlaVal)]) -> TlaVal
+
+pub fn make_set(Array[TlaVal]) -> TlaVal
+
+pub fn parse_cfg(String) -> TlaConfig raise TlaError
+
+pub fn parse_expr_str(String) -> Expr raise TlaError
+
+pub fn parse_module(String) -> TlaModule raise TlaError
+
+pub fn render_result_markdown(CheckResult) -> String
+
+pub fn render_result_text(CheckResult) -> String
+
+pub fn render_state_graph_svg(CheckResult) -> String
+
+pub fn render_trace_svg(CheckResult) -> String
+
+pub fn set_contains(Array[TlaVal], TlaVal) -> Bool
+
+// Errors
+#derive(Eq, @debug.Debug)
+pub(all) suberror TlaError {
+  LexError(String)
+  ParseError(String)
+  CfgError(String)
+  EvalError(String)
+  CheckError(String)
+  InvalidInput(String)
+}
+pub fn TlaError::equal(Self, Self) -> Bool
+pub fn TlaError::not_equal(Self, Self) -> Bool
+pub fn TlaError::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+#derive(Eq, @debug.Debug)
+pub(all) enum BinOp {
+  And
+  Or
+  Implies
+  Iff
+  LeadsTo
+  Eq
+  Neq
+  Lt
+  Le
+  Gt
+  Ge
+  In
+  NotIn
+  SubsetEq
+  ProperSubset
+  SetUnion
+  SetInter
+  SetDiff
+  Range
+  Concat
+  Add
+  Sub
+  Mul
+  IntDiv
+  Mod
+  Pow
+  Cross
+  MapTo
+  MergeFunc
+}
+pub fn BinOp::equal(Self, Self) -> Bool
+pub fn BinOp::not_equal(Self, Self) -> Bool
+pub fn BinOp::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct BoundGroup {
+  pats : Array[BoundPat]
+  domain : Expr
+}
+pub fn BoundGroup::equal(Self, Self) -> Bool
+pub fn BoundGroup::not_equal(Self, Self) -> Bool
+pub fn BoundGroup::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum BoundPat {
+  Single(String)
+  TuplePat(Array[String])
+}
+pub fn BoundPat::equal(Self, Self) -> Bool
+pub fn BoundPat::not_equal(Self, Self) -> Bool
+pub fn BoundPat::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum CfgValue {
+  CfgInt(Int64)
+  CfgBool(Bool)
+  CfgStr(String)
+  CfgModel(String)
+  CfgSet(Array[CfgValue])
+}
+pub fn CfgValue::equal(Self, Self) -> Bool
+pub fn CfgValue::not_equal(Self, Self) -> Bool
+pub fn CfgValue::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct CheckOptions {
+  max_states : Int32
+  max_graph_nodes : Int32
+  check_deadlock : Bool?
+}
+pub fn CheckOptions::equal(Self, Self) -> Bool
+pub fn CheckOptions::not_equal(Self, Self) -> Bool
+pub fn CheckOptions::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct CheckResult {
+  module_name : String
+  status : CheckStatus
+  status_text : String
+  states_generated : Int32
+  distinct_states : Int32
+  diameter : Int32
+  transitions : Int32
+  variables : Array[String]
+  invariants_checked : Array[String]
+  properties_checked : Array[String]
+  trace : Array[TraceStep]
+  lasso_loop_start : Int32?
+  graph_nodes : Array[GraphNode]
+  graph_edges : Array[GraphEdge]
+}
+pub fn CheckResult::equal(Self, Self) -> Bool
+pub fn CheckResult::not_equal(Self, Self) -> Bool
+pub fn CheckResult::to_json(Self) -> @json.Json
+pub fn CheckResult::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) enum CheckStatus {
+  Ok
+  InvariantViolation(String)
+  Deadlock
+  LivenessViolation(String)
+  StateLimitReached(Int32)
+}
+pub fn CheckStatus::equal(Self, Self) -> Bool
+pub fn CheckStatus::not_equal(Self, Self) -> Bool
+pub fn CheckStatus::to_json(Self) -> @json.Json
+pub fn CheckStatus::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct ExceptClause {
+  path : Array[ExceptStep]
+  value : Expr
+}
+pub fn ExceptClause::equal(Self, Self) -> Bool
+pub fn ExceptClause::not_equal(Self, Self) -> Bool
+pub fn ExceptClause::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum ExceptStep {
+  Index(Array[Expr])
+  Field(String)
+}
+pub fn ExceptStep::equal(Self, Self) -> Bool
+pub fn ExceptStep::not_equal(Self, Self) -> Bool
+pub fn ExceptStep::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum Expr {
+  BoolLit(Bool)
+  IntLit(Int64)
+  StrLit(String)
+  BuiltinSet(String)
+  Ident(String)
+  At
+  Call(String, Array[Expr])
+  Unary(UnaryOp, Expr)
+  Bin(BinOp, Expr, Expr)
+  ConjList(Array[Expr])
+  DisjList(Array[Expr])
+  IfThenElse(Expr, Expr, Expr)
+  CaseExpr(Array[(Expr, Expr)], Expr?)
+  LetIn(Array[OpDef], Expr)
+  ForAll(Array[BoundGroup], Expr)
+  Exists(Array[BoundGroup], Expr)
+  Choose(BoundPat, Expr, Expr)
+  SetEnum(Array[Expr])
+  SetFilter(BoundPat, Expr, Expr)
+  SetMap(Expr, Array[BoundGroup])
+  TupleLit(Array[Expr])
+  RecordLit(Array[(String, Expr)])
+  RecordSet(Array[(String, Expr)])
+  FuncDef(Array[BoundGroup], Expr)
+  FuncSet(Expr, Expr)
+  FuncApply(Expr, Array[Expr])
+  RecordField(Expr, String)
+  Except(Expr, Array[ExceptClause])
+  StutterAction(Expr, Expr)
+  Fairness(FairnessKind, Expr, Expr)
+}
+pub fn Expr::equal(Self, Self) -> Bool
+pub fn Expr::not_equal(Self, Self) -> Bool
+pub fn Expr::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum FairnessKind {
+  Weak
+  Strong
+}
+pub fn FairnessKind::equal(Self, Self) -> Bool
+pub fn FairnessKind::not_equal(Self, Self) -> Bool
+pub fn FairnessKind::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct GraphEdge {
+  from : Int32
+  to : Int32
+  action : String
+  is_on_trace : Bool
+}
+pub fn GraphEdge::equal(Self, Self) -> Bool
+pub fn GraphEdge::not_equal(Self, Self) -> Bool
+pub fn GraphEdge::to_json(Self) -> @json.Json
+pub fn GraphEdge::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct GraphNode {
+  id : Int32
+  depth : Int32
+  label : String
+  detail : String
+  is_init : Bool
+  is_violation : Bool
+  is_on_trace : Bool
+}
+pub fn GraphNode::equal(Self, Self) -> Bool
+pub fn GraphNode::not_equal(Self, Self) -> Bool
+pub fn GraphNode::to_json(Self) -> @json.Json
+pub fn GraphNode::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct OpDef {
+  name : String
+  params : Array[String]
+  body : Expr
+  is_local : Bool
+}
+pub fn OpDef::equal(Self, Self) -> Bool
+pub fn OpDef::not_equal(Self, Self) -> Bool
+pub fn OpDef::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct TlaConfig {
+  specification : String?
+  init : String?
+  next : String?
+  invariants : Array[String]
+  properties : Array[String]
+  constants : Array[(String, CfgValue)]
+  overrides : Array[(String, String)]
+  symmetry : String?
+  check_deadlock : Bool
+}
+pub fn TlaConfig::equal(Self, Self) -> Bool
+pub fn TlaConfig::not_equal(Self, Self) -> Bool
+pub fn TlaConfig::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) struct TlaModule {
+  name : String
+  extends : Array[String]
+  constants : Array[String]
+  variables : Array[String]
+  assumes : Array[Expr]
+  defs : Array[OpDef]
+}
+pub fn TlaModule::equal(Self, Self) -> Bool
+pub fn TlaModule::find_def(Self, String) -> OpDef?
+pub fn TlaModule::not_equal(Self, Self) -> Bool
+pub fn TlaModule::to_repr(Self) -> @debug.Repr
+
+#derive(@debug.Debug)
+pub(all) enum TlaVal {
+  Bool(Bool)
+  Int(Int64)
+  Str(String)
+  ModelVal(String)
+  Set(Array[TlaVal])
+  Tuple(Array[TlaVal])
+  Func(Array[(TlaVal, TlaVal)])
+}
+pub fn TlaVal::compare(Self, Self) -> Int32
+pub fn TlaVal::equal(Self, Self) -> Bool
+pub fn TlaVal::not_equal(Self, Self) -> Bool
+pub fn TlaVal::op_ge(Self, Self) -> Bool
+pub fn TlaVal::op_gt(Self, Self) -> Bool
+pub fn TlaVal::op_le(Self, Self) -> Bool
+pub fn TlaVal::op_lt(Self, Self) -> Bool
+pub fn TlaVal::to_repr(Self) -> @debug.Repr
+pub impl Compare for TlaVal
+pub impl Eq for TlaVal
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct TraceStep {
+  step : Int32
+  action : String
+  state_id : Int32
+  bindings : Array[VarBinding]
+  diffs : Array[VarDiff]
+}
+pub fn TraceStep::equal(Self, Self) -> Bool
+pub fn TraceStep::not_equal(Self, Self) -> Bool
+pub fn TraceStep::to_json(Self) -> @json.Json
+pub fn TraceStep::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug)
+pub(all) enum UnaryOp {
+  Not
+  Neg
+  Subset
+  Union
+  Domain
+  Prime
+  Unchanged
+  Enabled
+  Always
+  Eventually
+}
+pub fn UnaryOp::equal(Self, Self) -> Bool
+pub fn UnaryOp::not_equal(Self, Self) -> Bool
+pub fn UnaryOp::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct VarBinding {
+  name : String
+  value : String
+}
+pub fn VarBinding::equal(Self, Self) -> Bool
+pub fn VarBinding::not_equal(Self, Self) -> Bool
+pub fn VarBinding::to_json(Self) -> @json.Json
+pub fn VarBinding::to_repr(Self) -> @debug.Repr
+
+#derive(Eq, @debug.Debug, @json.ToJson)
+pub(all) struct VarDiff {
+  name : String
+  before : String
+  after : String
+}
+pub fn VarDiff::equal(Self, Self) -> Bool
+pub fn VarDiff::not_equal(Self, Self) -> Bool
+pub fn VarDiff::to_json(Self) -> @json.Json
+pub fn VarDiff::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits

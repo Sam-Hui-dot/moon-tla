@@ -1,0 +1,94 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MOON_WORK: 'off'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install MoonBit toolchain
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Format, multi-target check, unit tests, and CLI builds
+        run: |
+          moon version --all
+          moon update
+          moon fmt --check
+          for target in wasm wasm-gc js native; do
+            echo "=== target: $target ==="
+            moon check --target "$target" --deny-warn
+            moon test --target "$target" --deny-warn
+          done
+          moon build --target wasm --deny-warn cmd/main
+          moon build --target native --release --deny-warn cmd/main
+      - name: Verify root library from an independent consumer module
+        run: |
+          WS="$RUNNER_TEMP/moon-tla-consumer"
+          mkdir -p "$WS/library" "$WS/consumer"
+          cp moon.mod moon.pkg ast.mbt lexer.mbt parser.mbt cfg.mbt value.mbt eval.mbt checker.mbt liveness.mbt viz.mbt report.mbt "$WS/library/"
+          printf 'members = ["library", "consumer"]\n' > "$WS/moon.work"
+          cat > "$WS/consumer/moon.mod" << 'EOF'
+          name = "consumer/tla-check"
+          version = "0.1.0"
+
+          import {
+            "Sam-Hui-dot/moon-tla@0.1.0",
+          }
+          EOF
+          cat > "$WS/consumer/moon.pkg" << 'EOF'
+          import {
+            "Sam-Hui-dot/moon-tla" @tla,
+          }
+          pkgtype(kind: "executable")
+          EOF
+          cat > "$WS/consumer/main.mbt" << 'EOF'
+          fn main raise {
+            let spec =
+              #|---- MODULE Mini ----
+              #|EXTENDS Integers
+              #|VARIABLE x
+              #|Init == x = 0
+              #|Next == x < 3 /\ x' = x + 1
+              #|Safe == x < 2
+              #|====
+            let cfg = "INIT Init\nNEXT Next\nINVARIANT Safe"
+            let res = @tla.check_spec_sources(spec, cfg)
+            guard res.trace.length() == 3 else {
+              abort("unexpected trace length")
+            }
+            let svg = @tla.render_trace_svg(res)
+            guard svg.contains("moon-tla-trace") else {
+              abort("missing svg class")
+            }
+            println("consumer: ok")
+          }
+          EOF
+          MOON_WORK="" moon -C "$WS/consumer" run --target js --deny-warn .
+          MOON_WORK="" moon -C "$WS/consumer" run --target wasm --deny-warn .
+      - name: Build and smoke-test zero-upload browser studio
+        run: |
+          python3 demo/build_web.py
+      - name: Differential oracle against official Java TLC v1.7.4 (11 distributed specs)
+        run: |
+          python3 demo/verify_tlc.py
+          cat demo/out/tlc-oracle-summary.md >> "$GITHUB_STEP_SUMMARY"
