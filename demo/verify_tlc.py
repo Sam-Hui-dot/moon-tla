@@ -58,18 +58,20 @@ def ensure_tlc_jar(custom_path: str | None) -> Path:
 
 
 def find_moon_tla_bin() -> Path:
-    exe = "main.exe" if os.name == "nt" else "main"
-    bin_path = ROOT / "_build" / "native" / "release" / "build" / "cmd" / "main" / exe
-    if not bin_path.exists():
-        print("Building native release binary for moon-tla ...")
-        subprocess.run(
-            ["moon", "build", "--target", "native", "--release", "--deny-warn", "cmd/main"],
-            cwd=ROOT,
-            check=True,
-        )
-    if not bin_path.exists():
-        raise FileNotFoundError(f"moon-tla native binary not found at {bin_path}")
-    return bin_path
+    build_dir = ROOT / "_build" / "native" / "release" / "build" / "cmd" / "main"
+    for cand in (build_dir / "main.exe", build_dir / "main"):
+        if cand.exists():
+            return cand
+    print("Building native release binary for moon-tla ...")
+    subprocess.run(
+        ["moon", "build", "--target", "native", "--release", "--deny-warn", "cmd/main"],
+        cwd=ROOT,
+        check=True,
+    )
+    for cand in (build_dir / "main.exe", build_dir / "main"):
+        if cand.exists():
+            return cand
+    raise FileNotFoundError(f"moon-tla native binary not found in {build_dir}")
 
 
 def run_moon_tla(bin_path: Path, tla: Path, cfg: Path) -> tuple[dict, float]:
