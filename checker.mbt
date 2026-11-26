@@ -125,6 +125,7 @@ pub(all) struct CheckResult {
   distinct_states : Int32
   diameter : Int32
   transitions : Int32
+  symmetry_applied : Bool
   variables : Array[String]
   invariants_checked : Array[String]
   properties_checked : Array[String]
@@ -150,6 +151,7 @@ pub(all) struct CheckOptions {
   max_states : Int32
   max_graph_nodes : Int32
   check_deadlock : Bool?
+  use_symmetry : Bool
 }
 
 ///|
@@ -164,8 +166,9 @@ pub fn check_options(
   max_states~ : Int32 = 200000,
   max_graph_nodes~ : Int32 = 80,
   check_deadlock~ : Bool? = None,
+  use_symmetry~ : Bool = true,
 ) -> CheckOptions {
-  { max_states, max_graph_nodes, check_deadlock, }
+  { max_states, max_graph_nodes, check_deadlock, use_symmetry, }
 }
 
 ///|
@@ -855,16 +858,101 @@ fn eval_action_states(
 }
 
 ///|
+priv struct FairnessClause {
+  kind : FairnessKind
+  vars_expr : Expr
+  action_expr : Expr
+  bindings : Array[(String, TlaVal)]
+}
+
+///|
 priv struct ExtractedSpec {
   init_expr : Expr
   next_expr : Expr
-  has_wf_next : Bool
+  fairness : Array[FairnessClause]
+}
+
+///|
+fn expr_has_fairness(tla_mod : TlaModule, expr : Expr, depth : Int32) -> Bool {
+  if depth > 12 {
+    return false
+  }
+  match expr {
+    Fairness(_, _, _) => true
+    Bin(And, a, b) =>
+      expr_has_fairness(tla_mod, a, depth + 1) ||
+      expr_has_fairness(tla_mod, b, depth + 1)
+    ConjList(items) => {
+      for it in items {
+        if expr_has_fairness(tla_mod, it, depth + 1) {
+          return true
+        }
+      }
+      false
+    }
+    ForAll(_, body) => expr_has_fairness(tla_mod, body, depth + 1)
+    Ident(name) =>
+      match tla_mod.find_def(name) {
+        Some(d) if d.params.is_empty() =>
+          expr_has_fairness(tla_mod, d.body, depth + 1)
+        _ => false
+      }
+    _ => false
+  }
+}
+
+///|
+fn collect_fairness_clauses(
+  ctx : EvalCtx,
+  expr : Expr,
+  bindings : Array[(String, TlaVal)],
+  out : Array[FairnessClause],
+  depth : Int32,
+) -> Unit raise TlaError {
+  if depth > 16 {
+    return
+  }
+  match expr {
+    Fairness(kind, vars_expr, action_expr) =>
+      out.push({ kind, vars_expr, action_expr, bindings, })
+    Bin(And, a, b) => {
+      collect_fairness_clauses(ctx, a, bindings, out, depth + 1)
+      collect_fairness_clauses(ctx, b, bindings, out, depth + 1)
+    }
+    ConjList(items) =>
+      for it in items {
+        collect_fairness_clauses(ctx, it, bindings, out, depth + 1)
+      }
+    ForAll(groups, body) => {
+      let sub_ctx = if bindings.is_empty() {
+        ctx
+      } else {
+        ctx.with_locals(bindings)
+      }
+      let combos = expand_bound_groups(sub_ctx, groups)
+      for combo in combos {
+        let next_bindings = bindings.copy()
+        for pair in combo.0 {
+          next_bindings.push(pair)
+        }
+        collect_fairness_clauses(ctx, body, next_bindings, out, depth + 1)
+      }
+    }
+    Ident(name) =>
+      match ctx.lookup_op(name) {
+        Some(d) if d.params.is_empty() =>
+          collect_fairness_clauses(ctx, d.body, bindings, out, depth + 1)
+        _ => ()
+      }
+    _ => ()
+  }
 }
 
 ///|
 fn extract_spec(
   tla_mod : TlaModule,
   cfg : TlaConfig,
+  ctx : EvalCtx,
 ) -> ExtractedSpec raise TlaError {
   match cfg.specification {
     Some(spec_name) => {
@@ -876,13 +964,17 @@ fn extract_spec(
       flatten_conj(def.body, parts)
       let init_parts : Array[Expr] = []
       let mut next_opt : Expr? = None
-      let mut has_wf = false
+      let fairness : Array[FairnessClause] = []
       for p in parts {
         match p {
           Unary(Always, StutterAction(act, _)) => next_opt = Some(act)
           Unary(Always, act) => next_opt = Some(act)
-          Fairness(_, _, _) => has_wf = true
-          other => init_parts.push(other)
+          other =>
+            if expr_has_fairness(tla_mod, other, 0) {
+              collect_fairness_clauses(ctx, other, [], fairness, 0)
+            } else {
+              init_parts.push(other)
+            }
         }
       }
       let init_expr = if init_parts.is_empty() {
@@ -901,7 +993,7 @@ fn extract_spec(
             "SPECIFICATION '\{spec_name}' is missing [][Next]_vars",
           )
       }
-      { init_expr, next_expr, has_wf_next: has_wf, }
+      { init_expr, next_expr, fairness, }
     }
     None => {
       let init_name = match cfg.init {
@@ -931,7 +1023,7 @@ fn extract_spec(
       {
         init_expr: Ident(init_name),
         next_expr: Ident(next_name),
-        has_wf_next: false,
+        fairness: [],
       }
     }
   }
@@ -1234,7 +1326,13 @@ pub fn check_module(
     }
   }
 
-  let spec = extract_spec(tla_mod, cfg)
+  let spec = extract_spec(tla_mod, cfg, ctx)
+  let sym_spec = if options.use_symmetry {
+    extract_symmetry_spec(ctx, cfg.symmetry)
+  } else {
+    empty_symmetry_spec()
+  }
+  let symmetry_applied = !sym_spec.groups.is_empty()
   let check_deadlock = match options.check_deadlock {
     Some(b) => b
     None => cfg.check_deadlock
@@ -1257,7 +1355,12 @@ pub fn check_module(
   // Seed initial states (depth 0)
   for init_vals in raw_inits {
     states_generated += 1
-    let fp = fingerprint_state(tla_mod.variables, init_vals)
+    let canon_init = if symmetry_applied {
+      canonicalize_state(sym_spec, init_vals)
+    } else {
+      init_vals
+    }
+    let fp = fingerprint_state(tla_mod.variables, canon_init)
     if !fp_to_id.contains(fp) {
       let id = states.length()
       fp_to_id.set(fp, id)
@@ -1300,7 +1403,12 @@ pub fn check_module(
       let next_vals = pair.1
       states_generated += 1
       transitions += 1
-      let fp = fingerprint_state(tla_mod.variables, next_vals)
+      let canon_next = if symmetry_applied {
+        canonicalize_state(sym_spec, next_vals)
+      } else {
+        next_vals
+      }
+      let fp = fingerprint_state(tla_mod.variables, canon_next)
       match fp_to_id.get(fp) {
         Some(existing_id) => adj[cur_id].push((existing_id, act))
         None => {
@@ -1349,8 +1457,11 @@ pub fn check_module(
             tla_mod.variables,
             states,
             adj,
+            fp_to_id,
+            sym_spec,
+            symmetry_applied,
             cfg.properties,
-            spec.has_wf_next,
+            spec.fairness,
           ) {
           Some((prop_name, ltrace, loop_idx, viol_state)) => {
             status = LivenessViolation(prop_name)
@@ -1384,6 +1495,7 @@ pub fn check_module(
       max_depth + 1
     },
     transitions,
+    symmetry_applied,
     variables: tla_mod.variables,
     invariants_checked: cfg.invariants,
     properties_checked: cfg.properties,

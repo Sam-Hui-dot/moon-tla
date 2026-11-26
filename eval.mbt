@@ -529,6 +529,42 @@ fn eval_builtin_call(
     }
     "ToString" if args.length() == 1 =>
       Some(Str(format_val(eval_expr(ctx, args[0]))))
+    "Permutations" if args.length() == 1 => {
+      let elems = expect_set(eval_expr(ctx, args[0]), "Permutations")
+      if elems.length() > 5 {
+        raise EvalError(
+          "Permutations of set with \{elems.length()} elements exceeds direct enumeration limit (5); use inside SYMMETRY",
+        )
+      }
+      let perms : Array[Array[TlaVal]] = []
+      let used : Array[Bool] = Array::make(elems.length(), false)
+      let cur : Array[TlaVal] = []
+      fn gen() -> Unit {
+        if cur.length() == elems.length() {
+          perms.push(cur.copy())
+          return
+        }
+        for i = 0; i < elems.length(); i = i + 1 {
+          if !used[i] {
+            used[i] = true
+            cur.push(elems[i])
+            gen()
+            let _ = cur.pop()
+            used[i] = false
+          }
+        }
+      }
+      gen()
+      let funcs : Array[TlaVal] = []
+      for p in perms {
+        let entries : Array[(TlaVal, TlaVal)] = []
+        for i = 0; i < elems.length(); i = i + 1 {
+          entries.push((elems[i], p[i]))
+        }
+        funcs.push(make_func(entries))
+      }
+      Some(make_set(funcs))
+    }
     _ => None
   }
 }

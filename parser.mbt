@@ -100,6 +100,7 @@ fn is_reserved_terminator(word : String) -> Bool {
     | "VARIABLE"
     | "VARIABLES"
     | "LOCAL"
+    | "RECURSIVE"
     | "ASSUME"
     | "ASSUMPTION"
     | "THEOREM"
@@ -210,6 +211,29 @@ pub fn parse_module(src : String) -> TlaModule raise TlaError {
     if p.is_kw("ASSUME") || p.is_kw("ASSUMPTION") {
       let _ = p.advance()
       assumes.push(p.parse_expr(0))
+      continue
+    }
+    if p.is_kw("RECURSIVE") {
+      let _ = p.advance()
+      while true {
+        let _ = p.expect_ident()
+        if p.peek().kind == LParen {
+          let _ = p.advance()
+          if p.peek().kind != RParen {
+            let _ = p.expect_ident()
+            while p.peek().kind == Comma {
+              let _ = p.advance()
+              let _ = p.expect_ident()
+            }
+          }
+          p.expect_kind(RParen, "')'")
+        }
+        if p.peek().kind == Comma {
+          let _ = p.advance()
+        } else {
+          break
+        }
+      }
       continue
     }
     let mut is_local = false
