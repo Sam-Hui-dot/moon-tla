@@ -1,0 +1,8 @@
+/_build/
+/.mooncakes/
+/demo/out/
+/demo/.tlc-cache/
+/docs/moon-tla.js
+/docs/samples.js
+states/
+*.old
