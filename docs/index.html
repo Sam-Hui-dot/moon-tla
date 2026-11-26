@@ -339,6 +339,10 @@
         <input id="chk-deadlock" type="checkbox" checked />
         Deadlock
       </label>
+      <label class="chk">
+        <input id="chk-symmetry" type="checkbox" checked />
+        Symmetry
+      </label>
       <button id="run-btn" class="primary">Run Checker (Ctrl+Enter)</button>
     </div>
   </header>
@@ -427,6 +431,7 @@
       const cfgEditor = document.getElementById("cfg-editor");
       const maxStatesInput = document.getElementById("max-states");
       const chkDeadlock = document.getElementById("chk-deadlock");
+      const chkSymmetry = document.getElementById("chk-symmetry");
       const runBtn = document.getElementById("run-btn");
       const outputBody = document.getElementById("output-body");
       const dlSvgBtn = document.getElementById("dl-svg-btn");
@@ -515,14 +520,20 @@
             return;
           }
           let html = `<table class="diff-table"><thead><tr><th>Step</th><th>Action</th><th>Changed Variables</th><th>Full State Snapshot</th></tr></thead><tbody>`;
+          const loopStart = res.lasso_loop_start;
           for (const st of res.trace) {
+            const isCycle = loopStart !== null && loopStart !== undefined && st.step >= loopStart;
+            const phaseTag = loopStart !== null && loopStart !== undefined
+              ? (isCycle ? ` <span class="diff-chip" style="background:rgba(192,132,252,0.2);color:#d8b4fe;">CYCLE</span>` : ` <span class="diff-chip" style="background:rgba(56,189,248,0.16);color:#7dd3fc;">PREFIX</span>`)
+              : "";
+            const rowStyle = isCycle ? ` style="background:rgba(192,132,252,0.08);"` : "";
             const diffs = st.step === 1
               ? `<span style="color:#38bdf8;">(initial state)</span>`
               : (st.diffs.length === 0
                 ? `<span style="color:#94a3b8;">(stutter)</span>`
                 : st.diffs.map((d) => `<span class="diff-chip">${escHtml(d.name)}: ${escHtml(d.before)} &rarr; ${escHtml(d.after)}</span>`).join(""));
             const bindings = st.bindings.map((b) => `<div><strong>${escHtml(b.name)}</strong> = ${escHtml(b.value)}</div>`).join("");
-            html += `<tr><td>${st.step}</td><td>${escHtml(st.action)}</td><td>${diffs}</td><td class="state-kv">${bindings}</td></tr>`;
+            html += `<tr${rowStyle}><td>${st.step}${phaseTag}</td><td>${escHtml(st.action)}</td><td>${diffs}</td><td class="state-kv">${bindings}</td></tr>`;
           }
           html += `</tbody></table>`;
           outputBody.innerHTML = html;
@@ -556,6 +567,7 @@
           maxStates,
           maxGraphNodes: 80,
           checkDeadlock: chkDeadlock.checked,
+          useSymmetry: chkSymmetry.checked,
         });
         const elapsed = performance.now() - t0;
         kpiTime.textContent = `${elapsed.toFixed(1)} ms`;
@@ -570,7 +582,8 @@
           const [label, cls] = classifyStatus(r);
           kpiVerdict.textContent = label;
           kpiVerdict.className = "k-val " + cls;
-          kpiStates.textContent = `${r.distinct_states} (${r.transitions} edges)`;
+          const symNote = r.symmetry_applied ? " [SYM]" : "";
+          kpiStates.textContent = `${r.distinct_states} (${r.transitions} edges)${symNote}`;
           kpiDiameter.textContent = `${r.diameter}`;
         }
         renderActiveTab();

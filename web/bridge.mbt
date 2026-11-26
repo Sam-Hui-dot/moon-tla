@@ -15,6 +15,7 @@ pub fn check_spec_json(
   max_states : Int32,
   max_graph_nodes : Int32,
   deadlock_mode : Int32,
+  symmetry_mode : Int32,
 ) -> String {
   try {
     let dl_ov : Bool? = if deadlock_mode < 0 {
@@ -26,6 +27,7 @@ pub fn check_spec_json(
       max_states~,
       max_graph_nodes~,
       check_deadlock=dl_ov,
+      use_symmetry=symmetry_mode != 0,
     )
     let result = @moon-tla.check_spec_sources(tla_src, cfg_src, options=opts)
     let trace_svg = @moon-tla.render_trace_svg(result)
@@ -84,7 +86,7 @@ pub fn eval_expr_json(expr_src : String) -> String {
 
 ///|
 extern "js" fn register_browser_api(
-  check_fn : (String, String, Int32, Int32, Int32) -> String,
+  check_fn : (String, String, Int32, Int32, Int32, Int32) -> String,
   parse_fn : (String) -> String,
   eval_fn : (String) -> String,
 ) -> Unit =
@@ -92,7 +94,8 @@ extern "js" fn register_browser_api(
   #|  globalThis.MoonTla = {
   #|    checkSpec: (tla, cfg, opts = {}) => {
   #|      const dl = typeof opts.checkDeadlock === "boolean" ? (opts.checkDeadlock ? 1 : 0) : -1;
-  #|      return JSON.parse(checkFn(tla, cfg, opts.maxStates || 100000, opts.maxGraphNodes || 80, dl));
+  #|      const sym = opts.useSymmetry === false ? 0 : 1;
+  #|      return JSON.parse(checkFn(tla, cfg, opts.maxStates || 100000, opts.maxGraphNodes || 80, dl, sym));
   #|    },
   #|    parseModule: (tla) => JSON.parse(parseFn(tla)),
   #|    evalExpr: (expr) => JSON.parse(evalFn(expr)),

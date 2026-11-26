@@ -96,6 +96,46 @@ PRESET_META = [
         "check_deadlock": True,
         "description": "4-node distributed token ring verifying single-token exclusivity (SingleToken) and ring circulation across all reachable states.",
     },
+    {
+        "id": "PaxosConsensus",
+        "title": "Synod Paxos Consensus (Safe, 3,921 states)",
+        "tag": "Safe",
+        "pair": None,
+        "check_deadlock": False,
+        "description": "Lamport Single-Decree Synod Paxos over 3 Acceptors, 2 Values, and 2 Ballots. Verifies Agreement (at most one chosen value) across 3,921 distinct states.",
+    },
+    {
+        "id": "TwoPhaseSym",
+        "title": "Two-Phase Commit (SYMMETRY Permutations)",
+        "tag": "Symmetry",
+        "pair": "TwoPhase",
+        "check_deadlock": True,
+        "description": "3-RM Two-Phase Commit with SYMMETRY Permutations(RM), compressing 288 states down to 80 canonical quotient states (3.6x reduction, exact TLC match).",
+    },
+    {
+        "id": "PetersonLiveness",
+        "title": "Peterson's Lock (Per-Action WF Liveness)",
+        "tag": "Liveness",
+        "pair": "StarvationBuggy",
+        "check_deadlock": True,
+        "description": "Peterson's mutual exclusion with quantified per-process weak fairness (\\A i \\in Procs : WF_vars(ProcStep(i))). Proves StarvationFree ((pc[i] = \"wait\") ~> (pc[i] = \"cs\")).",
+    },
+    {
+        "id": "StarvationBuggy",
+        "title": "Biased Lock (Fair Starvation Lasso Bug)",
+        "tag": "Liveness Bug",
+        "pair": "PetersonLiveness",
+        "check_deadlock": True,
+        "description": "Biased 2-process lock missing Peterson's turn tie-breaker. Even under per-process weak fairness, Emerson-Lei SCC pruning catches the exact fair starvation Lasso cycle.",
+    },
+    {
+        "id": "TokenRingLiveness",
+        "title": "Token Ring (Infinitely-Often []<> Liveness)",
+        "tag": "Liveness",
+        "pair": "TokenRing",
+        "check_deadlock": True,
+        "description": "4-node fair token ring verifying \\A n \\in Nodes : []<>(holder = n) under WF_holder(Next).",
+    },
 ]
 
 

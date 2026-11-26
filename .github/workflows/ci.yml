@@ -45,14 +45,14 @@ jobs:
         run: |
           WS="$RUNNER_TEMP/moon-tla-consumer"
           mkdir -p "$WS/library" "$WS/consumer"
-          cp moon.mod moon.pkg ast.mbt lexer.mbt parser.mbt cfg.mbt value.mbt eval.mbt checker.mbt liveness.mbt viz.mbt report.mbt "$WS/library/"
+          cp moon.mod moon.pkg ast.mbt lexer.mbt parser.mbt cfg.mbt value.mbt eval.mbt symmetry.mbt checker.mbt liveness.mbt viz.mbt report.mbt "$WS/library/"
           printf 'members = ["library", "consumer"]\n' > "$WS/moon.work"
           cat > "$WS/consumer/moon.mod" << 'EOF'
           name = "consumer/tla-check"
-          version = "0.1.0"
+          version = "0.2.0"
 
           import {
-            "Sam-Hui-dot/moon-tla@0.1.0",
+            "Sam-Hui-dot/moon-tla@0.2.0",
           }
           EOF
           cat > "$WS/consumer/moon.pkg" << 'EOF'
@@ -88,7 +88,7 @@ jobs:
       - name: Build and smoke-test zero-upload browser studio
         run: |
           python3 demo/build_web.py
-      - name: Differential oracle against official Java TLC v1.7.4 (11 distributed specs)
+      - name: Differential oracle against official Java TLC v1.7.4 (16 distributed specs)
         run: |
           python3 demo/verify_tlc.py
           cat demo/out/tlc-oracle-summary.md >> "$GITHUB_STEP_SUMMARY"
