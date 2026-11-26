@@ -21,14 +21,19 @@ SPEC_ORDER = [
     "DieHard",
     "TwoPhase",
     "TwoPhaseBuggy",
+    "TwoPhaseSym",
     "MutexPeterson",
     "MutexBuggy",
+    "PetersonLiveness",
+    "StarvationBuggy",
     "RaftElection",
     "RaftSplitBrainBuggy",
+    "PaxosConsensus",
     "BankTransfer",
     "BankTransferBuggy",
     "DiningPhilosophers",
     "TokenRing",
+    "TokenRingLiveness",
 ]
 
 
@@ -196,7 +201,10 @@ def main() -> None:
         m_verdict = normalize_moon_verdict(m_res)
         t_verdict = t_res["verdict"]
 
-        if m_verdict != t_verdict:
+        verdict_match = (m_verdict == t_verdict) or (
+            m_verdict.startswith("LIVENESS") and t_verdict == "LIVENESS"
+        )
+        if not verdict_match:
             raise AssertionError(
                 f"[{name}] verdict mismatch: moon-tla={m_verdict} vs TLC={t_verdict}"
             )
@@ -217,7 +225,17 @@ def main() -> None:
                 raise AssertionError(
                     f"[{name}] diameter mismatch: moon-tla={m_diam} vs TLC={t_diam}"
                 )
-            parity_note = f"exact states={m_distinct}, diam={m_diam}"
+            sym_tag = ", SYM" if m_res.get("symmetry_applied") else ""
+            parity_note = f"exact states={m_distinct}, diam={m_diam}{sym_tag}"
+        elif m_verdict.startswith("LIVENESS"):
+            if m_distinct != t_distinct:
+                raise AssertionError(
+                    f"[{name}] liveness distinct_states mismatch: moon-tla={m_distinct} vs TLC={t_distinct}"
+                )
+            loop_start = m_res.get("lasso_loop_start")
+            if loop_start is None:
+                raise AssertionError(f"[{name}] liveness counterexample missing lasso_loop_start")
+            parity_note = f"exact states={m_distinct}, lasso={m_trace} (loop@{loop_start})"
         else:
             if m_trace != t_trace:
                 raise AssertionError(
@@ -283,7 +301,7 @@ def main() -> None:
             f"| `{r['name']}` | `{r['verdict']}` | {r['moon_distinct']} / {r['tlc_distinct']} | {diam_str} | {trace_str} | {r['moon_ms']:.1f} ms | {r['tlc_ms']:.1f} ms | **{r['speedup']:.1f}x** |"
         )
     md_lines.append(
-        f"| **Total ({len(rows)} specs)** | **11/11 EXACT** | — | — | — | **{total_moon_ms:.1f} ms** | **{total_tlc_ms:.1f} ms** | **{agg_speedup:.1f}x** |"
+        f"| **Total ({len(rows)} specs)** | **{len(rows)}/{len(rows)} EXACT** | — | — | — | **{total_moon_ms:.1f} ms** | **{total_tlc_ms:.1f} ms** | **{agg_speedup:.1f}x** |"
     )
     md_lines.append("")
 
