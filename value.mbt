@@ -159,6 +159,71 @@ pub fn make_func(entries : Array[(TlaVal, TlaVal)]) -> TlaVal {
 }
 
 ///|
+/// Fast O(N + M) union of two already-sorted canonical `TlaVal` set arrays.
+pub fn set_union_sorted(a : Array[TlaVal], b : Array[TlaVal]) -> TlaVal {
+  let la = a.length()
+  let lb = b.length()
+  if la == 0 {
+    return Set(b)
+  }
+  if lb == 0 {
+    return Set(a)
+  }
+  // Common fast path: `s \cup {x}` (single element insertion via binary search)
+  if lb == 1 {
+    let x = b[0]
+    let mut lo = 0
+    let mut hi = la
+    while lo < hi {
+      let mid = lo + (hi - lo) / 2
+      let c = compare_val(a[mid], x)
+      if c == 0 {
+        return Set(a)
+      } else if c < 0 {
+        lo = mid + 1
+      } else {
+        hi = mid
+      }
+    }
+    let out : Array[TlaVal] = Array::make(la + 1, x)
+    for i = 0; i < lo; i = i + 1 {
+      out[i] = a[i]
+    }
+    out[lo] = x
+    for i = lo; i < la; i = i + 1 {
+      out[i + 1] = a[i]
+    }
+    return Set(out)
+  }
+  let out : Array[TlaVal] = []
+  let mut i = 0
+  let mut j = 0
+  while i < la && j < lb {
+    let c = compare_val(a[i], b[j])
+    if c < 0 {
+      out.push(a[i])
+      i += 1
+    } else if c > 0 {
+      out.push(b[j])
+      j += 1
+    } else {
+      out.push(a[i])
+      i += 1
+      j += 1
+    }
+  }
+  while i < la {
+    out.push(a[i])
+    i += 1
+  }
+  while j < lb {
+    out.push(b[j])
+    j += 1
+  }
+  Set(out)
+}
+
+///|
 /// Binary search for `target` in a canonical sorted array of `TlaVal`.
 pub fn set_contains(elems : Array[TlaVal], target : TlaVal) -> Bool {
   let mut lo = 0
@@ -425,15 +490,13 @@ pub fn fingerprint_val(v : TlaVal) -> (UInt64, UInt64) {
 ///|
 /// Compute a deterministic 128-bit canonical fingerprint of a state vector.
 pub fn fingerprint_state(
-  var_names : Array[String],
+  _var_names : Array[String],
   values : Array[TlaVal],
 ) -> (UInt64, UInt64) {
   let h = Hasher128::new()
   h.mix_u64(values.length().to_uint64())
   for i = 0; i < values.length(); i = i + 1 {
-    if i < var_names.length() {
-      h.mix_str(var_names[i])
-    }
+    h.mix_u64(i.to_uint64())
     h.mix_val(values[i])
   }
   (h.h1, h.h2)

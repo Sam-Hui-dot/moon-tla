@@ -1,4 +1,47 @@
 ///|
+/// Zero-copy persistent lexical scope chain for bound variables and operator parameters.
+priv enum LocalEnv {
+  Empty
+  Bind(String, TlaVal, LocalEnv)
+}
+
+///|
+fn LocalEnv::get(self : LocalEnv, name : String) -> TlaVal? {
+  let mut cur = self
+  while true {
+    match cur {
+      Empty => return None
+      Bind(k, v, rest) => if k == name { return Some(v) } else { cur = rest }
+    }
+  }
+  None
+}
+
+///|
+fn LocalEnv::contains(self : LocalEnv, name : String) -> Bool {
+  self.get(name) is Some(_)
+}
+
+///|
+/// Zero-copy persistent lexical operator chain for `LET ... IN` definitions.
+priv enum LocalOps {
+  EmptyOps
+  BindOp(String, OpDef, LocalOps)
+}
+
+///|
+fn LocalOps::get(self : LocalOps, name : String) -> OpDef? {
+  let mut cur = self
+  while true {
+    match cur {
+      EmptyOps => return None
+      BindOp(k, v, rest) => if k == name { return Some(v) } else { cur = rest }
+    }
+  }
+  None
+}
+
+///|
 /// Runtime evaluation environment for TLA+ expressions and operators.
 priv struct EvalCtx {
   defs : Map[String, OpDef]
@@ -6,10 +49,59 @@ priv struct EvalCtx {
   var_index : Map[String, Int32]
   curr : Array[TlaVal]?
   next : Array[TlaVal?]?
-  locals : Map[String, TlaVal]
-  local_ops : Map[String, OpDef]
+  locals : LocalEnv
+  local_ops : LocalOps
   at_val : TlaVal?
   depth : Int32
+}
+
+///|
+fn EvalCtx::with_local(self : EvalCtx, name : String, val : TlaVal) -> EvalCtx {
+  {
+    defs: self.defs,
+    consts: self.consts,
+    var_index: self.var_index,
+    curr: self.curr,
+    next: self.next,
+    locals: Bind(name, val, self.locals),
+    local_ops: self.local_ops,
+    at_val: self.at_val,
+    depth: self.depth + 1,
+  }
+}
+
+///|
+fn EvalCtx::with_pat(
+  self : EvalCtx,
+  pat : BoundPat,
+  val : TlaVal,
+) -> EvalCtx raise TlaError {
+  match pat {
+    Single(name) => self.with_local(name, val)
+    TuplePat(names) => {
+      let items = expect_tuple(val, "tuple pattern binding")
+      if items.length() != names.length() {
+        raise EvalError(
+          "tuple pattern arity mismatch: expected \{names.length()}, got \{items.length()}",
+        )
+      }
+      let mut env = self.locals
+      for i = 0; i < names.length(); i = i + 1 {
+        env = Bind(names[i], items[i], env)
+      }
+      {
+        defs: self.defs,
+        consts: self.consts,
+        var_index: self.var_index,
+        curr: self.curr,
+        next: self.next,
+        locals: env,
+        local_ops: self.local_ops,
+        at_val: self.at_val,
+        depth: self.depth + 1,
+      }
+    }
+  }
 }
 
 ///|
@@ -17,9 +109,9 @@ fn EvalCtx::with_locals(
   self : EvalCtx,
   extra : Array[(String, TlaVal)],
 ) -> EvalCtx {
-  let next_locals = self.locals.copy()
+  let mut next_locals = self.locals
   for pair in extra {
-    next_locals.set(pair.0, pair.1)
+    next_locals = Bind(pair.0, pair.1, next_locals)
   }
   {
     defs: self.defs,
@@ -36,9 +128,9 @@ fn EvalCtx::with_locals(
 
 ///|
 fn EvalCtx::with_local_ops(self : EvalCtx, ops : Array[OpDef]) -> EvalCtx {
-  let next_ops = self.local_ops.copy()
+  let mut next_ops = self.local_ops
   for op in ops {
-    next_ops.set(op.name, op)
+    next_ops = BindOp(op.name, op, next_ops)
   }
   {
     defs: self.defs,
@@ -417,7 +509,7 @@ fn eval_except_path(
         rhs,
       )
       copy[found] = (copy[found].0, updated)
-      make_func(copy)
+      Func(copy)
     }
     _ =>
       raise EvalError(
@@ -511,6 +603,116 @@ fn eval_builtin_call(
       let _ = expect_set(eval_expr(ctx, args[0]), "IsFiniteSet")
       Some(Bool(true))
     }
+    // Standard Bags module operators
+    "IsABag" if args.length() == 1 => {
+      let v = eval_expr(ctx, args[0])
+      let entries = match v {
+        Tuple(items) => {
+          let mut ok = true
+          for it in items {
+            match it {
+              Int(k) if k > 0L => ()
+              _ => {
+                ok = false
+                break
+              }
+            }
+          }
+          return Some(Bool(ok))
+        }
+        Func(es) => es
+        _ => return Some(Bool(false))
+      }
+      let mut ok = true
+      for pair in entries {
+        match pair.1 {
+          Int(k) if k > 0L => ()
+          _ => {
+            ok = false
+            break
+          }
+        }
+      }
+      Some(Bool(ok))
+    }
+    "BagToSet" if args.length() == 1 =>
+      Some(func_domain(eval_expr(ctx, args[0])))
+    "SetToBag" if args.length() == 1 => {
+      let elems = expect_set(eval_expr(ctx, args[0]), "SetToBag")
+      let entries : Array[(TlaVal, TlaVal)] = []
+      for e in elems {
+        entries.push((e, Int(1L)))
+      }
+      Some(make_func(entries))
+    }
+    "BagIn" if args.length() == 2 => {
+      let e = eval_expr(ctx, args[0])
+      let bag = eval_expr(ctx, args[1])
+      match func_lookup(bag, e) {
+        Some(Int(k)) if k > 0L => Some(Bool(true))
+        _ => Some(Bool(false))
+      }
+    }
+    "CopiesIn" if args.length() == 2 => {
+      let e = eval_expr(ctx, args[0])
+      let bag = eval_expr(ctx, args[1])
+      match func_lookup(bag, e) {
+        Some(Int(k)) => Some(Int(k))
+        _ => Some(Int(0L))
+      }
+    }
+    "BagCardinality" if args.length() == 1 => {
+      let entries = val_to_func_entries(
+        eval_expr(ctx, args[0]),
+        "BagCardinality",
+      )
+      let mut sum = 0L
+      for pair in entries {
+        sum += expect_int(pair.1, "BagCardinality")
+      }
+      Some(Int(sum))
+    }
+    "SubBag" if args.length() == 2 => {
+      let b1 = val_to_func_entries(eval_expr(ctx, args[0]), "SubBag")
+      let b2 = eval_expr(ctx, args[1])
+      for pair in b1 {
+        let c1 = expect_int(pair.1, "SubBag")
+        let c2 = match func_lookup(b2, pair.0) {
+          Some(Int(k)) => k
+          _ => 0L
+        }
+        if c1 > c2 {
+          return Some(Bool(false))
+        }
+      }
+      Some(Bool(true))
+    }
+    "BagUnion" if args.length() == 1 => {
+      let bags = expect_set(eval_expr(ctx, args[0]), "BagUnion")
+      let acc : Array[(TlaVal, Int64)] = []
+      for b in bags {
+        let entries = val_to_func_entries(b, "BagUnion")
+        for pair in entries {
+          let cnt = expect_int(pair.1, "BagUnion")
+          let mut found = false
+          for i = 0; i < acc.length(); i = i + 1 {
+            if compare_val(acc[i].0, pair.0) == 0 {
+              acc[i] = (acc[i].0, acc[i].1 + cnt)
+              found = true
+              break
+            }
+          }
+          if !found && cnt > 0L {
+            acc.push((pair.0, cnt))
+          }
+        }
+      }
+      let out : Array[(TlaVal, TlaVal)] = []
+      for pair in acc {
+        out.push((pair.0, Int(pair.1)))
+      }
+      Some(make_func(out))
+    }
     "PrintT" if args.length() == 1 => {
       let _ = eval_expr(ctx, args[0])
       Some(Bool(true))
@@ -592,6 +794,9 @@ fn eval_expr(ctx : EvalCtx, expr : Expr) -> TlaVal raise TlaError {
           )
       }
     Ident(name) => {
+      if name == "EmptyBag" {
+        return Tuple([])
+      }
       match ctx.locals.get(name) {
         Some(v) => return v
         None => ()
@@ -824,11 +1029,7 @@ fn eval_expr(ctx : EvalCtx, expr : Expr) -> TlaVal raise TlaError {
     Bin(SetUnion, a, b) => {
       let sa = expect_set(eval_expr(ctx, a), "\\cup")
       let sb = expect_set(eval_expr(ctx, b), "\\cup")
-      let combined = sa.copy()
-      for x in sb {
-        combined.push(x)
-      }
-      make_set(combined)
+      set_union_sorted(sa, sb)
     }
     Bin(SetInter, a, b) => {
       let sa = expect_set(eval_expr(ctx, a), "\\cap")
@@ -969,35 +1170,79 @@ fn eval_expr(ctx : EvalCtx, expr : Expr) -> TlaVal raise TlaError {
       }
     }
     LetIn(local_defs, body) => {
-      let sub = ctx.with_local_ops(local_defs)
+      let mut sub = ctx.with_local_ops(local_defs)
+      // Eagerly memoize 0-arg pure LET definitions (falling back to lazy LocalOps on error)
+      for op in local_defs {
+        if op.params.is_empty() {
+          let cached : TlaVal? = Some(eval_expr(sub, op.body)) catch {
+            _ => None
+          }
+          match cached {
+            Some(v) => sub = sub.with_local(op.name, v)
+            None => ()
+          }
+        }
+      }
       eval_expr(sub, body)
     }
     ForAll(groups, body) => {
-      let combos = expand_bound_groups(ctx, groups)
-      for combo in combos {
-        let sub = ctx.with_locals(combo.0)
-        if !expect_bool(eval_expr(sub, body), "\\A body") {
-          return Bool(false)
+      fn check_all(
+        gi : Int32,
+        pi : Int32,
+        cur_ctx : EvalCtx,
+      ) -> Bool raise TlaError {
+        if gi == groups.length() {
+          return expect_bool(eval_expr(cur_ctx, body), "\\A body")
         }
+        let g = groups[gi]
+        let elems = expect_set(
+          eval_expr(cur_ctx, g.domain),
+          "quantifier domain",
+        )
+        let next_gi = if pi + 1 < g.pats.length() { gi } else { gi + 1 }
+        let next_pi = if pi + 1 < g.pats.length() { pi + 1 } else { 0 }
+        let pat = g.pats[pi]
+        for elem in elems {
+          let sub = cur_ctx.with_pat(pat, elem)
+          if !check_all(next_gi, next_pi, sub) {
+            return false
+          }
+        }
+        true
       }
-      Bool(true)
+      Bool(check_all(0, 0, ctx))
     }
     Exists(groups, body) => {
-      let combos = expand_bound_groups(ctx, groups)
-      for combo in combos {
-        let sub = ctx.with_locals(combo.0)
-        if expect_bool(eval_expr(sub, body), "\\E body") {
-          return Bool(true)
+      fn check_any(
+        gi : Int32,
+        pi : Int32,
+        cur_ctx : EvalCtx,
+      ) -> Bool raise TlaError {
+        if gi == groups.length() {
+          return expect_bool(eval_expr(cur_ctx, body), "\\E body")
         }
+        let g = groups[gi]
+        let elems = expect_set(
+          eval_expr(cur_ctx, g.domain),
+          "quantifier domain",
+        )
+        let next_gi = if pi + 1 < g.pats.length() { gi } else { gi + 1 }
+        let next_pi = if pi + 1 < g.pats.length() { pi + 1 } else { 0 }
+        let pat = g.pats[pi]
+        for elem in elems {
+          let sub = cur_ctx.with_pat(pat, elem)
+          if check_any(next_gi, next_pi, sub) {
+            return true
+          }
+        }
+        false
       }
-      Bool(false)
+      Bool(check_any(0, 0, ctx))
     }
     Choose(pat, domain, pred) => {
       let elems = expect_set(eval_expr(ctx, domain), "CHOOSE domain")
       for elem in elems {
-        let added : Array[(String, TlaVal)] = []
-        bind_pattern(pat, elem, added)
-        let sub = ctx.with_locals(added)
+        let sub = ctx.with_pat(pat, elem)
         if expect_bool(eval_expr(sub, pred), "CHOOSE predicate") {
           return elem
         }
@@ -1015,9 +1260,7 @@ fn eval_expr(ctx : EvalCtx, expr : Expr) -> TlaVal raise TlaError {
       let elems = expect_set(eval_expr(ctx, domain), "set filter domain")
       let kept : Array[TlaVal] = []
       for elem in elems {
-        let added : Array[(String, TlaVal)] = []
-        bind_pattern(pat, elem, added)
-        let sub = ctx.with_locals(added)
+        let sub = ctx.with_pat(pat, elem)
         if expect_bool(eval_expr(sub, pred), "set filter predicate") {
           kept.push(elem)
         }
@@ -1182,8 +1425,8 @@ pub fn eval_expr_standalone(
     var_index: Map([]),
     curr: None,
     next: None,
-    locals: Map([]),
-    local_ops: Map([]),
+    locals: Empty,
+    local_ops: EmptyOps,
     at_val: None,
     depth: 0,
   }

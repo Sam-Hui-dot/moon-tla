@@ -27,13 +27,21 @@ SPEC_ORDER = [
     "PetersonLiveness",
     "StarvationBuggy",
     "RaftElection",
+    "RaftElectionSym",
     "RaftSplitBrainBuggy",
     "PaxosConsensus",
+    "PaxosSym",
     "BankTransfer",
     "BankTransferBuggy",
     "DiningPhilosophers",
     "TokenRing",
     "TokenRingLiveness",
+    "EWD840",
+    "StabilityBuggy",
+    "Bakery",
+    "ChandyLamport",
+    "BagsDemo",
+    "SlidingWindow",
 ]
 
 

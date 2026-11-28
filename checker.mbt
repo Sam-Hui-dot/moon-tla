@@ -341,20 +341,43 @@ fn solve_expr(
           at_val: ctx.at_val,
           depth: ctx.depth + 1,
         }
-        let combos = expand_bound_groups(ectx, groups)
-        for combo in combos {
-          let sub_ctx = ctx.with_locals(combo.0)
-          let branch = solve_expr(
-            sub_ctx,
-            body,
-            [ps.clone()],
-            is_init,
-            top_next_name,
+        fn run_exists(
+          gi : Int32,
+          pi : Int32,
+          cur_ectx : EvalCtx,
+          cur_ctx : EvalCtx,
+        ) -> Unit raise TlaError {
+          if gi == groups.length() {
+            let branch = solve_expr(
+              cur_ctx,
+              body,
+              [ps.clone()],
+              is_init,
+              top_next_name,
+            )
+            for r in branch {
+              out.push(r)
+            }
+            return
+          }
+          let g = groups[gi]
+          let elems = expect_set(
+            eval_expr(cur_ectx, g.domain),
+            "quantifier domain",
           )
-          for r in branch {
-            out.push(r)
+          let next_gi = if pi + 1 < g.pats.length() { gi } else { gi + 1 }
+          let next_pi = if pi + 1 < g.pats.length() { pi + 1 } else { 0 }
+          let pat = g.pats[pi]
+          for elem in elems {
+            run_exists(
+              next_gi,
+              next_pi,
+              cur_ectx.with_pat(pat, elem),
+              cur_ctx.with_pat(pat, elem),
+            )
           }
         }
+        run_exists(0, 0, ectx, ctx)
       }
       out
     }
@@ -1063,8 +1086,8 @@ fn build_eval_ctx(
     var_index,
     curr: None,
     next: None,
-    locals: Map([]),
-    local_ops: Map([]),
+    locals: Empty,
+    local_ops: EmptyOps,
     at_val: None,
     depth: 0,
   }
@@ -1083,8 +1106,8 @@ fn eval_state_pred(
     var_index: ctx.var_index,
     curr: Some(state),
     next: None,
-    locals: Map([]),
-    local_ops: Map([]),
+    locals: Empty,
+    local_ops: EmptyOps,
     at_val: None,
     depth: 0,
   }

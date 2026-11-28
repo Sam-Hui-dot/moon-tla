@@ -11,7 +11,7 @@ pub fn cfg_value_to_val(CfgValue) -> TlaVal
 
 pub fn check_module(TlaModule, TlaConfig, options? : CheckOptions) -> CheckResult raise TlaError
 
-pub fn check_options(max_states? : Int32, max_graph_nodes? : Int32, check_deadlock? : Bool?) -> CheckOptions
+pub fn check_options(max_states? : Int32, max_graph_nodes? : Int32, check_deadlock? : Bool?, use_symmetry? : Bool) -> CheckOptions
 
 pub fn check_spec_sources(String, String, options? : CheckOptions) -> CheckResult raise TlaError
 
@@ -52,6 +52,8 @@ pub fn render_state_graph_svg(CheckResult) -> String
 pub fn render_trace_svg(CheckResult) -> String
 
 pub fn set_contains(Array[TlaVal], TlaVal) -> Bool
+
+pub fn set_union_sorted(Array[TlaVal], Array[TlaVal]) -> TlaVal
 
 // Errors
 #derive(Eq, @debug.Debug)
@@ -139,6 +141,7 @@ pub(all) struct CheckOptions {
   max_states : Int32
   max_graph_nodes : Int32
   check_deadlock : Bool?
+  use_symmetry : Bool
 }
 pub fn CheckOptions::equal(Self, Self) -> Bool
 pub fn CheckOptions::not_equal(Self, Self) -> Bool
@@ -153,6 +156,7 @@ pub(all) struct CheckResult {
   distinct_states : Int32
   diameter : Int32
   transitions : Int32
+  symmetry_applied : Bool
   variables : Array[String]
   invariants_checked : Array[String]
   properties_checked : Array[String]

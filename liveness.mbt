@@ -543,6 +543,75 @@ fn find_avoidance_lasso(
 }
 
 ///|
+/// Check for a fair infinite execution that visits `~stable` infinitely often
+/// (violating `<>[]stable` or `[](trigger => <>[]stable)`).
+fn find_instability_lasso(
+  var_names : Array[String],
+  states : Array[StoredState],
+  adj : Array[Array[(Int32, String)]],
+  start_ids : Array[Int32],
+  stable_holds : Array[Bool],
+  fairness : Array[PreparedFairness],
+) -> (Array[TraceStep], Int32?, Int32)? {
+  let n = states.length()
+  let all_allowed : Array[Bool] = Array::make(n, true)
+  let fair_sccs = find_fair_sccs(n, adj, all_allowed, fairness)
+  let bad_target : Array[Bool] = Array::make(n, false)
+  let scc_of : Array[Int32] = Array::make(n, -1)
+  for ci = 0; ci < fair_sccs.length(); ci = ci + 1 {
+    let comp = fair_sccs[ci]
+    let mut has_unstable = false
+    for v in comp {
+      if !stable_holds[v] {
+        has_unstable = true
+        break
+      }
+    }
+    if has_unstable {
+      for v in comp {
+        if !stable_holds[v] {
+          bad_target[v] = true
+          scc_of[v] = ci
+        }
+      }
+    }
+  }
+  match bfs_path_masked(n, adj, all_allowed, start_ids, bad_target) {
+    None => None
+    Some(suffix) => {
+      let start_id = suffix[0].0
+      let anchor = suffix[suffix.length() - 1].0
+      let rev_prefix : Array[(Int32, String)] = []
+      let mut cur = start_id
+      while cur >= 0 {
+        rev_prefix.push((cur, states[cur].action))
+        cur = states[cur].parent
+      }
+      let combined : Array[(Int32, String)] = []
+      for i = rev_prefix.length() - 1; i >= 0; i = i - 1 {
+        combined.push(rev_prefix[i])
+      }
+      for i = 1; i < suffix.length(); i = i + 1 {
+        combined.push(suffix[i])
+      }
+      let loop_step = combined.length()
+      let ci = scc_of[anchor]
+      let comp = if ci >= 0 { fair_sccs[ci] } else { [anchor] }
+      let in_scc : Array[Bool] = Array::make(n, false)
+      for v in comp {
+        in_scc[v] = true
+      }
+      let cycle = find_fair_cycle_in_scc(n, adj, comp, in_scc, anchor, fairness)
+      for step in cycle {
+        combined.push(step)
+      }
+      let trace = build_trace_from_ids(var_names, states, combined)
+      Some((trace, Some(loop_step), anchor))
+    }
+  }
+}
+
+///|
 fn eval_state_pred_ctx(
   ctx : EvalCtx,
   state : Array[TlaVal],
@@ -680,6 +749,62 @@ fn check_temporal_expr(
           None
         }
       }
+    // <>[]P => []<>Q (strong fairness / persistence-to-recurrence implication)
+    Bin(
+      Implies,
+      Unary(Eventually, Unary(Always, p)),
+      Unary(Always, Unary(Eventually, q)),
+    ) => {
+      let goal_holds : Array[Bool] = Array::make(n, false)
+      for i = 0; i < n; i = i + 1 {
+        let ph = eval_state_pred_ctx(ctx, states[i].vals, p, prop_name)
+        let qh = eval_state_pred_ctx(ctx, states[i].vals, q, prop_name)
+        // Violated iff a fair SCC stays in (P /\ ~Q) forever
+        goal_holds[i] = !(ph && !qh)
+      }
+      match
+        find_avoidance_lasso(
+          var_names, states, adj, all_ids, goal_holds, fairness,
+        ) {
+        Some((trace, loop_idx, anchor)) =>
+          Some((prop_name, trace, loop_idx, anchor))
+        None => None
+      }
+    }
+    // [](P => <>[]Q) (triggered eventual stability)
+    Unary(Always, Bin(Implies, p, Unary(Eventually, Unary(Always, q)))) => {
+      let triggers : Array[Int32] = []
+      let q_holds : Array[Bool] = Array::make(n, false)
+      for i = 0; i < n; i = i + 1 {
+        q_holds[i] = eval_state_pred_ctx(ctx, states[i].vals, q, prop_name)
+        if eval_state_pred_ctx(ctx, states[i].vals, p, prop_name) {
+          triggers.push(i)
+        }
+      }
+      match
+        find_instability_lasso(
+          var_names, states, adj, triggers, q_holds, fairness,
+        ) {
+        Some((trace, loop_idx, anchor)) =>
+          Some((prop_name, trace, loop_idx, anchor))
+        None => None
+      }
+    }
+    // <>[]P (eventual stability / convergence)
+    Unary(Eventually, Unary(Always, p)) => {
+      let p_holds : Array[Bool] = Array::make(n, false)
+      for i = 0; i < n; i = i + 1 {
+        p_holds[i] = eval_state_pred_ctx(ctx, states[i].vals, p, prop_name)
+      }
+      match
+        find_instability_lasso(
+          var_names, states, adj, init_ids, p_holds, fairness,
+        ) {
+        Some((trace, loop_idx, anchor)) =>
+          Some((prop_name, trace, loop_idx, anchor))
+        None => None
+      }
+    }
     // []<>Q (infinitely often Q)
     Unary(Always, Unary(Eventually, q)) => {
       let q_holds : Array[Bool] = Array::make(n, false)

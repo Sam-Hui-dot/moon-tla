@@ -49,10 +49,10 @@ jobs:
           printf 'members = ["library", "consumer"]\n' > "$WS/moon.work"
           cat > "$WS/consumer/moon.mod" << 'EOF'
           name = "consumer/tla-check"
-          version = "0.2.0"
+          version = "0.3.0"
 
           import {
-            "Sam-Hui-dot/moon-tla@0.2.0",
+            "Sam-Hui-dot/moon-tla@0.3.0",
           }
           EOF
           cat > "$WS/consumer/moon.pkg" << 'EOF'
